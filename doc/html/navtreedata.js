@@ -25,7 +25,7 @@
 var NAVTREE =
 [
   [ "LibDriver INA226", "index.html", [
-    [ "Modules", "modules.html", "modules" ],
+    [ "Topics", "topics.html", "topics" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -51,8 +51,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"group__ina226__basic__driver.html#gga9bd99fe9a446bd5e2c42f78909444869ab57201cc5cf74870a23ef9027d6655ba"
+"structina226__info__s.html#a8f9dbe66ac0b66ebae0a36fcb4ba368e"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';
