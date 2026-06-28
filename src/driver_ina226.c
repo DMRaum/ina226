@@ -661,9 +661,8 @@ uint8_t ina226_read_shunt_voltage(ina226_handle_t *handle, int16_t *raw, float *
                     break;                                                              /* break */
                 }
                 handle->delay_ms(1);                                                    /* delay 1ms */
-                timeout--;                                                              /* timeout-- */
             }
-            if (timeout == 0)                                                           /* check timeout */
+            if (i >= timeout)                                                           /* check timeout */
             {
                 handle->debug_print("ina226: read timeout.\n");                         /* timeout */
                
@@ -749,9 +748,8 @@ uint8_t ina226_read_bus_voltage(ina226_handle_t *handle, uint16_t *raw, float *m
                     break;                                                              /* break */
                 }
                 handle->delay_ms(1);                                                    /* delay 1ms */
-                timeout--;                                                              /* timeout-- */
             }
-            if (timeout == 0)                                                           /* check timeout */
+            if (i >= timeout)                                                           /* check timeout */
             {
                 handle->debug_print("ina226: read timeout.\n");                         /* timeout */
                
@@ -841,9 +839,8 @@ uint8_t ina226_read_current(ina226_handle_t *handle, int16_t *raw, float *mA)
                     break;                                                              /* break */
                 }
                 handle->delay_ms(1);                                                    /* delay 1ms */
-                timeout--;                                                              /* timeout-- */
             }
-            if (timeout == 0)                                                           /* check timeout */
+            if (i >= timeout)                                                           /* check timeout */
             {
                 handle->debug_print("ina226: read timeout.\n");                         /* timeout */
                
@@ -929,9 +926,8 @@ uint8_t ina226_read_power(ina226_handle_t *handle, uint16_t *raw, float *mW)
                     break;                                                              /* break */
                 }
                 handle->delay_ms(1);                                                    /* delay 1ms */
-                timeout--;                                                              /* timeout-- */
             }
-            if (timeout == 0)                                                           /* check timeout */
+            if (i >= timeout)                                                           /* check timeout */
             {
                 handle->debug_print("ina226: read timeout.\n");                         /* timeout */
                
