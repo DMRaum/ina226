@@ -22,7 +22,7 @@
  * SOFTWARE. 
  *
  * @file      driver_ina226_shot.c
- * @brief     driver ina226 shot source file
+ * @brief     ina226 单次触发驱动源文件
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2025-01-29
@@ -30,29 +30,29 @@
  * <h3>history</h3>
  * <table>
  * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>first upload
+ * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>首次上传
  * </table>
  */
 
 #include "driver_ina226_shot.h"
 
-static ina226_handle_t gs_handle;        /**< ina226 handle */
+static ina226_handle_t gs_handle;        /**< ina226 句柄 */
 
 /**
- * @brief     shot example init
- * @param[in] addr_pin iic address pin
- * @param[in] r reference resistor value
- * @return    status code
- *            - 0 success
- *            - 1 init failed
- * @note      none
+ * @brief     单次触发性例初始化
+ * @param[in] addr_pin IIC 地址引脚
+ * @param[in] r 参考电阻值
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 初始化失败
+ * @note      无
  */
 uint8_t ina226_shot_init(ina226_address_t addr_pin, double r)
 {
     uint8_t res;
     uint16_t calibration;
     
-    /* link interface function */
+    /* 链接接口函数 */
     DRIVER_INA226_LINK_INIT(&gs_handle, ina226_handle_t);
     DRIVER_INA226_LINK_IIC_INIT(&gs_handle, ina226_interface_iic_init);
     DRIVER_INA226_LINK_IIC_DEINIT(&gs_handle, ina226_interface_iic_deinit);
@@ -62,68 +62,68 @@ uint8_t ina226_shot_init(ina226_address_t addr_pin, double r)
     DRIVER_INA226_LINK_DEBUG_PRINT(&gs_handle, ina226_interface_debug_print);
     DRIVER_INA226_LINK_RECEIVE_CALLBACK(&gs_handle, ina226_interface_receive_callback);
     
-    /* set addr pin */
+    /* 设置地址引脚 */
     res = ina226_set_addr_pin(&gs_handle, addr_pin);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
 
-    /* set the r */
+    /* 设置电阻 */
     res = ina226_set_resistance(&gs_handle, r);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set resistance failed.\n");
+        ina226_interface_debug_print("ina226: 设置电阻失败。\n");
        
         return 1;
     }
     
-    /* init */
+    /* 初始化 */
     res = ina226_init(&gs_handle);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: init failed.\n");
+        ina226_interface_debug_print("ina226: 初始化失败。\n");
        
         return 1;
     }
     
-    /* set default average mode */
+    /* 设置默认平均模式 */
     res = ina226_set_average_mode(&gs_handle, INA226_SHOT_DEFAULT_AVG_MODE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
     
-    /* set default bus voltage conversion time */
+    /* 设置默认总线电压转换时间 */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_SHOT_DEFAULT_BUS_VOLTAGE_CONVERSION_TIME);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
     
-    /* set default shunt voltage conversion time */
+    /* 设置默认分流电压转换时间 */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_SHOT_DEFAULT_SHUNT_VOLTAGE_CONVERSION_TIME);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
     
-    /* calculate calibration */
+    /* 计算校准 */
     res = ina226_calculate_calibration(&gs_handle, (uint16_t *)&calibration);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: calculate calibration failed.\n");
+        ina226_interface_debug_print("ina226: 计算校准失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
@@ -131,17 +131,17 @@ uint8_t ina226_shot_init(ina226_address_t addr_pin, double r)
     res = ina226_set_calibration(&gs_handle, calibration);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set calibration failed.\n");
+        ina226_interface_debug_print("ina226: 设置校准失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
     
-    /* set power down */
+    /* 设置断电模式 */
     res = ina226_set_mode(&gs_handle, INA226_MODE_POWER_DOWN);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
@@ -151,14 +151,14 @@ uint8_t ina226_shot_init(ina226_address_t addr_pin, double r)
 }
 
 /**
- * @brief      shot example read
- * @param[out] *mV pointer to a mV buffer
- * @param[out] *mA pointer to a mA buffer
- * @param[out] *mW pointer to a mW buffer
- * @return     status code
- *             - 0 success
- *             - 1 read failed
- * @note       none
+ * @brief      单次触发性例读取
+ * @param[out] *mV 指向 mV 缓冲区的指针
+ * @param[out] *mA 指向 mA 缓冲区的指针
+ * @param[out] *mW 指向 mW 缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取失败
+ * @note       无
  */
 uint8_t ina226_shot_read(float *mV, float *mA, float *mW)
 {
@@ -166,28 +166,28 @@ uint8_t ina226_shot_read(float *mV, float *mA, float *mW)
     int16_t s_raw;
     uint16_t u_raw;
     
-    /* set shunt bus voltage triggered */
+    /* 设置分流总线电压触发模式 */
     res = ina226_set_mode(&gs_handle, INA226_MODE_SHUNT_BUS_VOLTAGE_TRIGGERED);
     if (res != 0)
     {
         return 1;
     }
     
-    /* read bus voltage */
+    /* 读取总线电压 */
     res = ina226_read_bus_voltage(&gs_handle, (uint16_t *)&u_raw, mV);
     if (res != 0)
     {
         return 1;
     }
     
-    /* read current */
+    /* 读取电流 */
     res = ina226_read_current(&gs_handle, (int16_t *)&s_raw, mA);
     if (res != 0)
     {
         return 1;
     }
     
-    /* read power */
+    /* 读取功率 */
     res = ina226_read_power(&gs_handle, (uint16_t *)&u_raw, mW);
     if (res != 0)
     {
@@ -198,11 +198,11 @@ uint8_t ina226_shot_read(float *mV, float *mA, float *mW)
 }
 
 /**
- * @brief  shot example deinit
- * @return status code
- *         - 0 success
- *         - 1 deinit failed
- * @note   none
+ * @brief  单次触发性例反初始化
+ * @return 状态码
+ *         - 0 成功
+ *         - 1 反初始化失败
+ * @note   无
  */
 uint8_t ina226_shot_deinit(void)
 {

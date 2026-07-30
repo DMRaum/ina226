@@ -22,7 +22,7 @@
  * SOFTWARE. 
  *
  * @file      driver_ina226_shot.c
- * @brief     driver ina226 shot source file
+ * @brief     ina226 单次触发驱动源文件
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2025-01-29
@@ -30,7 +30,7 @@
  * <h3>history</h3>
  * <table>
  * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>first upload
+ * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>首次上传
  * </table>
  */
 
@@ -49,41 +49,41 @@ extern "C"{
  */
 
 /**
- * @brief ina226 shot example default definition
+ * @brief ina226 单次触发性例默认定义
  */
-#define INA226_SHOT_DEFAULT_AVG_MODE                             INA226_AVG_16                        /**< 16 averages */
-#define INA226_SHOT_DEFAULT_BUS_VOLTAGE_CONVERSION_TIME          INA226_CONVERSION_TIME_1P1_MS        /**< bus voltage conversion time 1.1 ms */
-#define INA226_SHOT_DEFAULT_SHUNT_VOLTAGE_CONVERSION_TIME        INA226_CONVERSION_TIME_1P1_MS        /**< shunt voltage conversion time 1.1 ms */
+#define INA226_SHOT_DEFAULT_AVG_MODE                             INA226_AVG_16                        /**< 16 次平均 */
+#define INA226_SHOT_DEFAULT_BUS_VOLTAGE_CONVERSION_TIME          INA226_CONVERSION_TIME_1P1_MS        /**< 总线电压转换时间 1.1 ms */
+#define INA226_SHOT_DEFAULT_SHUNT_VOLTAGE_CONVERSION_TIME        INA226_CONVERSION_TIME_1P1_MS        /**< 分流电压转换时间 1.1 ms */
 
 /**
- * @brief     shot example init
- * @param[in] addr_pin iic address pin
- * @param[in] r reference resistor value
- * @return    status code
- *            - 0 success
- *            - 1 init failed
- * @note      none
+ * @brief     单次触发性例初始化
+ * @param[in] addr_pin iic 地址引脚
+ * @param[in] r 参考电阻值
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 初始化失败
+ * @note      无
  */
 uint8_t ina226_shot_init(ina226_address_t addr_pin, double r);
 
 /**
- * @brief  shot example deinit
- * @return status code
- *         - 0 success
- *         - 1 deinit failed
- * @note   none
+ * @brief  单次触发性例反初始化
+ * @return 状态码
+ *         - 0 成功
+ *         - 1 反初始化失败
+ * @note   无
  */
 uint8_t ina226_shot_deinit(void);
 
 /**
- * @brief      shot example read
- * @param[out] *mV pointer to a mV buffer
- * @param[out] *mA pointer to a mA buffer
- * @param[out] *mW pointer to a mW buffer
- * @return     status code
- *             - 0 success
- *             - 1 read failed
- * @note       none
+ * @brief      单次触发性例读取
+ * @param[out] *mV 指向 mV 缓冲区的指针
+ * @param[out] *mA 指向 mA 缓冲区的指针
+ * @param[out] *mW 指向 mW 缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取失败
+ * @note       无
  */
 uint8_t ina226_shot_read(float *mV, float *mA, float *mW);
 

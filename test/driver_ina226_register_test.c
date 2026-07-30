@@ -22,7 +22,7 @@
  * SOFTWARE. 
  *
  * @file      driver_ina226_register_test.c
- * @brief     driver ina226 register test source file
+ * @brief     ina226 寄存器测试源文件
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2025-01-29
@@ -30,22 +30,22 @@
  * <h3>history</h3>
  * <table>
  * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>first upload
+ * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>首次上传
  * </table>
  */
 
 #include "driver_ina226_register_test.h"
 #include <stdlib.h>
 
-static ina226_handle_t gs_handle;        /**< ina226 handle */
+static ina226_handle_t gs_handle;        /**< ina226 句柄 */
 
 /**
- * @brief     register test
- * @param[in] addr_pin iic device address
- * @return    status code
- *            - 0 success
- *            - 1 test failed
- * @note      none
+ * @brief     寄存器测试
+ * @param[in] addr_pin IIC 设备地址
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 测试失败
+ * @note      无
  */
 uint8_t ina226_register_test(ina226_address_t addr_pin)
 {
@@ -66,7 +66,7 @@ uint8_t ina226_register_test(ina226_address_t addr_pin)
     ina226_bool_t enable;
     ina226_alert_polarity_t pin;
     
-    /* link interface function */
+    /* 链接接口函数 */
     DRIVER_INA226_LINK_INIT(&gs_handle, ina226_handle_t);
     DRIVER_INA226_LINK_IIC_INIT(&gs_handle, ina226_interface_iic_init);
     DRIVER_INA226_LINK_IIC_DEINIT(&gs_handle, ina226_interface_iic_deinit);
@@ -76,1450 +76,1450 @@ uint8_t ina226_register_test(ina226_address_t addr_pin)
     DRIVER_INA226_LINK_DEBUG_PRINT(&gs_handle, ina226_interface_debug_print);
     DRIVER_INA226_LINK_RECEIVE_CALLBACK(&gs_handle, ina226_interface_receive_callback);
     
-    /* get information */
+    /* 获取信息 */
     res = ina226_info(&info);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get info failed.\n");
+        ina226_interface_debug_print("ina226: 获取信息失败。\n");
        
         return 1;
     }
     else
     {
-        /* print chip info */
-        ina226_interface_debug_print("ina226: chip is %s.\n", info.chip_name);
-        ina226_interface_debug_print("ina226: manufacturer is %s.\n", info.manufacturer_name);
-        ina226_interface_debug_print("ina226: interface is %s.\n", info.interface);
-        ina226_interface_debug_print("ina226: driver version is %d.%d.\n", info.driver_version / 1000, (info.driver_version % 1000) / 100);
-        ina226_interface_debug_print("ina226: min supply voltage is %0.1fV.\n", info.supply_voltage_min_v);
-        ina226_interface_debug_print("ina226: max supply voltage is %0.1fV.\n", info.supply_voltage_max_v);
-        ina226_interface_debug_print("ina226: max current is %0.2fmA.\n", info.max_current_ma);
-        ina226_interface_debug_print("ina226: max temperature is %0.1fC.\n", info.temperature_max);
-        ina226_interface_debug_print("ina226: min temperature is %0.1fC.\n", info.temperature_min);
+        /* 打印芯片信息 */
+        ina226_interface_debug_print("ina226: 芯片是 %s。\n", info.chip_name);
+        ina226_interface_debug_print("ina226: 制造商是 %s。\n", info.manufacturer_name);
+        ina226_interface_debug_print("ina226: 接口是 %s。\n", info.interface);
+        ina226_interface_debug_print("ina226: 驱动版本是 %d.%d。\n", info.driver_version / 1000, (info.driver_version % 1000) / 100);
+        ina226_interface_debug_print("ina226: 最小电源电压是 %0.1fV。\n", info.supply_voltage_min_v);
+        ina226_interface_debug_print("ina226: 最大电源电压是 %0.1fV。\n", info.supply_voltage_max_v);
+        ina226_interface_debug_print("ina226: 最大电流是 %0.2fmA。\n", info.max_current_ma);
+        ina226_interface_debug_print("ina226: 最高温度是 %0.1fC。\n", info.temperature_max);
+        ina226_interface_debug_print("ina226: 最低温度是 %0.1fC。\n", info.temperature_min);
     }
     
-    /* start register test */
-    ina226_interface_debug_print("ina226: start register test.\n");
+    /* 开始寄存器测试 */
+    ina226_interface_debug_print("ina226: 开始寄存器测试。\n");
     
-    /* ina226_set_addr_pin/ina226_get_addr_pin test */
-    ina226_interface_debug_print("ina226: ina226_set_addr_pin/ina226_get_addr_pin test.\n");
+    /* ina226_set_addr_pin/ina226_get_addr_pin 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_addr_pin/ina226_get_addr_pin 测试。\n");
     
-    /* set address 0 */
+    /* 设置地址 0 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_0);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 0.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 0。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_0 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_0 ? "ok" : "error");
     
-    /* set address 1 */
+    /* 设置地址 1 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_1);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 1.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 1。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_1 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_1 ? "ok" : "error");
     
-    /* set address 2 */
+    /* 设置地址 2 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_2);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 2.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 2。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_2 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_2 ? "ok" : "error");
     
-    /* set address 3 */
+    /* 设置地址 3 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_3);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 3.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 3。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_3 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_3 ? "ok" : "error");
     
-    /* set address 4 */
+    /* 设置地址 4 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_4);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 4.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 4。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_4 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_4 ? "ok" : "error");
     
-    /* set address 5 */
+    /* 设置地址 5 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_5);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 5.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 5。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_5 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_5 ? "ok" : "error");
     
-    /* set address 6 */
+    /* 设置地址 6 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_6);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 6.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 6。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_6 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_6 ? "ok" : "error");
     
-    /* set address 7 */
+    /* 设置地址 7 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_7);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 7.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 7。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_7 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_7 ? "ok" : "error");
     
-    /* set address 8 */
+    /* 设置地址 8 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_8);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 8.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 8。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_8 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_8 ? "ok" : "error");
     
-    /* set address 9 */
+    /* 设置地址 9 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_9);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 9.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 9。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_9 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_9 ? "ok" : "error");
     
-    /* set address 10 */
+    /* 设置地址 10 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_A);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 10.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 10。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_A ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_A ? "ok" : "error");
     
-    /* set address 11 */
+    /* 设置地址 11 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_B);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 11.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 11。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_B ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_B ? "ok" : "error");
     
-    /* set address 12 */
+    /* 设置地址 12 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_C);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 12.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 12。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_C ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_C ? "ok" : "error");
     
-    /* set address 13 */
+    /* 设置地址 13 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_D);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 13.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 13。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_D ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_D ? "ok" : "error");
     
-    /* set address 14 */
+    /* 设置地址 14 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_E);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 14.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 14。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_E ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_E ? "ok" : "error");
     
-    /* set address 15 */
+    /* 设置地址 15 */
     res = ina226_set_addr_pin(&gs_handle, INA226_ADDRESS_F);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set addr pin 15.\n");
+    ina226_interface_debug_print("ina226: 设置地址引脚 15。\n");
     res = ina226_get_addr_pin(&gs_handle, &addr);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取地址引脚失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check addr pin %s.\n", addr == INA226_ADDRESS_F ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查地址引脚 %s。\n", addr == INA226_ADDRESS_F ? "ok" : "error");
     
-    /* ina226_set_resistance/ina226_get_resistance test */
-    ina226_interface_debug_print("ina226: ina226_set_resistance/ina226_get_resistance test.\n");
+    /* ina226_set_resistance/ina226_get_resistance 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_resistance/ina226_get_resistance 测试。\n");
     
-    /* generate the r */
+    /* 生成电阻值 */
     r = (double)(rand() % 100) / 1000.0;
     res = ina226_set_resistance(&gs_handle, r);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set resistance failed.\n");
+        ina226_interface_debug_print("ina226: 设置电阻失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: set resistance %f.\n", r);
+    ina226_interface_debug_print("ina226: 设置电阻 %f。\n", r);
     res = ina226_get_resistance(&gs_handle, (double *)&r_check);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get resistance failed.\n");
+        ina226_interface_debug_print("ina226: 获取电阻失败。\n");
        
         return 1;
     }
-    ina226_interface_debug_print("ina226: check resistance %f.\n", r_check);
+    ina226_interface_debug_print("ina226: 检查电阻 %f。\n", r_check);
     
-    /* set addr pin */
+    /* 设置地址引脚 */
     res = ina226_set_addr_pin(&gs_handle, addr_pin);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set addr pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置地址引脚失败。\n");
        
         return 1;
     }
     
-    /* init */
+    /* 初始化 */
     res = ina226_init(&gs_handle);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: init failed.\n");
+        ina226_interface_debug_print("ina226: 初始化失败。\n");
        
         return 1;
     }
     
-    /* ina226_set_average_mode/ina226_get_average_mode test */
-    ina226_interface_debug_print("ina226: ina226_set_average_mode/ina226_get_average_mode test.\n");
+    /* ina226_set_average_mode/ina226_get_average_mode 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_average_mode/ina226_get_average_mode 测试。\n");
     
-    /* set average 1 */
+    /* 设置平均 1 */
     res = ina226_set_average_mode(&gs_handle, INA226_AVG_1);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set average 1.\n");
+    ina226_interface_debug_print("ina226: 设置平均 1。\n");
     res = ina226_get_average_mode(&gs_handle, &mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get average mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check average mode %s.\n", mode == INA226_AVG_1 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查平均模式 %s。\n", mode == INA226_AVG_1 ? "ok" : "error");
     
-    /* set average 4 */
+    /* 设置平均 4 */
     res = ina226_set_average_mode(&gs_handle, INA226_AVG_4);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set average 4.\n");
+    ina226_interface_debug_print("ina226: 设置平均 4。\n");
     res = ina226_get_average_mode(&gs_handle, &mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get average mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check average mode %s.\n", mode == INA226_AVG_4 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查平均模式 %s。\n", mode == INA226_AVG_4 ? "ok" : "error");
     
-    /* set average 16 */
+    /* 设置平均 16 */
     res = ina226_set_average_mode(&gs_handle, INA226_AVG_16);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set average 16.\n");
+    ina226_interface_debug_print("ina226: 设置平均 16。\n");
     res = ina226_get_average_mode(&gs_handle, &mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get average mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check average mode %s.\n", mode == INA226_AVG_16 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查平均模式 %s。\n", mode == INA226_AVG_16 ? "ok" : "error");
     
-    /* set average 64 */
+    /* 设置平均 64 */
     res = ina226_set_average_mode(&gs_handle, INA226_AVG_64);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set average 64.\n");
+    ina226_interface_debug_print("ina226: 设置平均 64。\n");
     res = ina226_get_average_mode(&gs_handle, &mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get average mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check average mode %s.\n", mode == INA226_AVG_64 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查平均模式 %s。\n", mode == INA226_AVG_64 ? "ok" : "error");
     
-    /* set average 128 */
+    /* 设置平均 128 */
     res = ina226_set_average_mode(&gs_handle, INA226_AVG_128);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set average 128.\n");
+    ina226_interface_debug_print("ina226: 设置平均 128。\n");
     res = ina226_get_average_mode(&gs_handle, &mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get average mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check average mode %s.\n", mode == INA226_AVG_128 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查平均模式 %s。\n", mode == INA226_AVG_128 ? "ok" : "error");
     
-    /* set average 256 */
+    /* 设置平均 256 */
     res = ina226_set_average_mode(&gs_handle, INA226_AVG_256);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set average 256.\n");
+    ina226_interface_debug_print("ina226: 设置平均 256。\n");
     res = ina226_get_average_mode(&gs_handle, &mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get average mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check average mode %s.\n", mode == INA226_AVG_256 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查平均模式 %s。\n", mode == INA226_AVG_256 ? "ok" : "error");
     
-    /* set average 512 */
+    /* 设置平均 512 */
     res = ina226_set_average_mode(&gs_handle, INA226_AVG_512);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set average 512.\n");
+    ina226_interface_debug_print("ina226: 设置平均 512。\n");
     res = ina226_get_average_mode(&gs_handle, &mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get average mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check average mode %s.\n", mode == INA226_AVG_512 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查平均模式 %s。\n", mode == INA226_AVG_512 ? "ok" : "error");
     
-    /* set average 1024 */
+    /* 设置平均 1024 */
     res = ina226_set_average_mode(&gs_handle, INA226_AVG_1024);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set average mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set average 1024.\n");
+    ina226_interface_debug_print("ina226: 设置平均 1024。\n");
     res = ina226_get_average_mode(&gs_handle, &mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get average mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取平均模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check average mode %s.\n", mode == INA226_AVG_1024 ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查平均模式 %s。\n", mode == INA226_AVG_1024 ? "ok" : "error");
     
-    /* ina226_set_bus_voltage_conversion_time/ina226_get_bus_voltage_conversion_time test */
-    ina226_interface_debug_print("ina226: ina226_set_bus_voltage_conversion_time/ina226_get_bus_voltage_conversion_time test.\n");
+    /* ina226_set_bus_voltage_conversion_time/ina226_get_bus_voltage_conversion_time 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_bus_voltage_conversion_time/ina226_get_bus_voltage_conversion_time 测试。\n");
     
-    /* set bus voltage conversion time 140us */
+    /* 设置总线电压转换时间 140us */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_140_US);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage conversion time 140us.\n");
+    ina226_interface_debug_print("ina226: 设置总线电压转换时间 140us。\n");
     res = ina226_get_bus_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_140_US ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查总线电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_140_US ? "ok" : "error");
     
-    /* set bus voltage conversion time 204us */
+    /* 设置总线电压转换时间 204us */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_204_US);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage conversion time 204us.\n");
+    ina226_interface_debug_print("ina226: 设置总线电压转换时间 204us。\n");
     res = ina226_get_bus_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_204_US ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查总线电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_204_US ? "ok" : "error");
     
-    /* set bus voltage conversion time 332us */
+    /* 设置总线电压转换时间 332us */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_332_US);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage conversion time 332us.\n");
+    ina226_interface_debug_print("ina226: 设置总线电压转换时间 332us。\n");
     res = ina226_get_bus_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_332_US ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查总线电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_332_US ? "ok" : "error");
     
-    /* set bus voltage conversion time 588us */
+    /* 设置总线电压转换时间 588us */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_588_US);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage conversion time 588us.\n");
+    ina226_interface_debug_print("ina226: 设置总线电压转换时间 588us。\n");
     res = ina226_get_bus_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_588_US ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查总线电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_588_US ? "ok" : "error");
     
-    /* set bus voltage conversion time 1.1ms */
+    /* 设置总线电压转换时间 1.1ms */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_1P1_MS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage conversion time 1.1ms.\n");
+    ina226_interface_debug_print("ina226: 设置总线电压转换时间 1.1ms。\n");
     res = ina226_get_bus_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_1P1_MS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查总线电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_1P1_MS ? "ok" : "error");
     
-    /* set bus voltage conversion time 2.116ms */
+    /* 设置总线电压转换时间 2.116ms */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_2P116_MS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage conversion time 2.116ms.\n");
+    ina226_interface_debug_print("ina226: 设置总线电压转换时间 2.116ms。\n");
     res = ina226_get_bus_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_2P116_MS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查总线电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_2P116_MS ? "ok" : "error");
     
-    /* set bus voltage conversion time 4.156ms */
+    /* 设置总线电压转换时间 4.156ms */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_4P156_MS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage conversion time 4.156ms.\n");
+    ina226_interface_debug_print("ina226: 设置总线电压转换时间 4.156ms。\n");
     res = ina226_get_bus_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_4P156_MS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查总线电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_4P156_MS ? "ok" : "error");
     
-    /* set bus voltage conversion time 8.244ms */
+    /* 设置总线电压转换时间 8.244ms */
     res = ina226_set_bus_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_8P244_MS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage conversion time 8.244ms.\n");
+    ina226_interface_debug_print("ina226: 设置总线电压转换时间 8.244ms。\n");
     res = ina226_get_bus_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get bus voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取总线电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_8P244_MS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查总线电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_8P244_MS ? "ok" : "error");
     
-    /* ina226_set_shunt_voltage_conversion_time/ina226_get_shunt_voltage_conversion_time test */
-    ina226_interface_debug_print("ina226: ina226_set_shunt_voltage_conversion_time/ina226_get_shunt_voltage_conversion_time test.\n");
+    /* ina226_set_shunt_voltage_conversion_time/ina226_get_shunt_voltage_conversion_time 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_shunt_voltage_conversion_time/ina226_get_shunt_voltage_conversion_time 测试。\n");
     
-    /* set shunt voltage conversion time 140us */
+    /* 设置分流电压转换时间 140us */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_140_US);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage conversion time 140us.\n");
+    ina226_interface_debug_print("ina226: 设置分流电压转换时间 140us。\n");
     res = ina226_get_shunt_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_140_US ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查分流电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_140_US ? "ok" : "error");
     
-    /* set shunt voltage conversion time 204us */
+    /* 设置分流电压转换时间 204us */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_204_US);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage conversion time 204us.\n");
+    ina226_interface_debug_print("ina226: 设置分流电压转换时间 204us。\n");
     res = ina226_get_shunt_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_204_US ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查分流电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_204_US ? "ok" : "error");
     
-    /* set shunt voltage conversion time 332us */
+    /* 设置分流电压转换时间 332us */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_332_US);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage conversion time 332us.\n");
+    ina226_interface_debug_print("ina226: 设置分流电压转换时间 332us。\n");
     res = ina226_get_shunt_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_332_US ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查分流电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_332_US ? "ok" : "error");
     
-    /* set shunt voltage conversion time 588us */
+    /* 设置分流电压转换时间 588us */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_588_US);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage conversion time 588us.\n");
+    ina226_interface_debug_print("ina226: 设置分流电压转换时间 588us。\n");
     res = ina226_get_shunt_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_588_US ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查分流电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_588_US ? "ok" : "error");
     
-    /* set shunt voltage conversion time 1.1ms */
+    /* 设置分流电压转换时间 1.1ms */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_1P1_MS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage conversion time 1.1ms.\n");
+    ina226_interface_debug_print("ina226: 设置分流电压转换时间 1.1ms。\n");
     res = ina226_get_shunt_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_1P1_MS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查分流电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_1P1_MS ? "ok" : "error");
     
-    /* set shunt voltage conversion time 2.116ms */
+    /* 设置分流电压转换时间 2.116ms */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_2P116_MS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage conversion time 2.116ms.\n");
+    ina226_interface_debug_print("ina226: 设置分流电压转换时间 2.116ms。\n");
     res = ina226_get_shunt_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_2P116_MS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查分流电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_2P116_MS ? "ok" : "error");
     
-    /* set shunt voltage conversion time 4.156ms */
+    /* 设置分流电压转换时间 4.156ms */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_4P156_MS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage conversion time 4.156ms.\n");
+    ina226_interface_debug_print("ina226: 设置分流电压转换时间 4.156ms。\n");
     res = ina226_get_shunt_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_4P156_MS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查分流电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_4P156_MS ? "ok" : "error");
     
-    /* set shunt voltage conversion time 8.244ms */
+    /* 设置分流电压转换时间 8.244ms */
     res = ina226_set_shunt_voltage_conversion_time(&gs_handle, INA226_CONVERSION_TIME_8P244_MS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 设置分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage conversion time 8.244ms.\n");
+    ina226_interface_debug_print("ina226: 设置分流电压转换时间 8.244ms。\n");
     res = ina226_get_shunt_voltage_conversion_time(&gs_handle, &t);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get shunt voltage conversion time failed.\n");
+        ina226_interface_debug_print("ina226: 获取分流电压转换时间失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage conversion time %s.\n", t == INA226_CONVERSION_TIME_8P244_MS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查分流电压转换时间 %s。\n", t == INA226_CONVERSION_TIME_8P244_MS ? "ok" : "error");
     
-    /* ina226_set_mode/ina226_get_mode test */
-    ina226_interface_debug_print("ina226: ina226_set_mode/ina226_get_mode test.\n");
+    /* ina226_set_mode/ina226_get_mode 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_mode/ina226_get_mode 测试。\n");
     
-    /* set power down */
+    /* 设置电源关闭 */
     res = ina226_set_mode(&gs_handle, INA226_MODE_POWER_DOWN);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set mode power down.\n");
+    ina226_interface_debug_print("ina226: 设置模式电源关闭。\n");
     res = ina226_get_mode(&gs_handle, &chip_mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mode %s.\n", chip_mode == INA226_MODE_POWER_DOWN ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查模式 %s。\n", chip_mode == INA226_MODE_POWER_DOWN ? "ok" : "error");
     
-    /* set shutdown */
+    /* 设置关机 */
     res = ina226_set_mode(&gs_handle, INA226_MODE_SHUTDOWN);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set mode shutdown.\n");
+    ina226_interface_debug_print("ina226: 设置模式关机。\n");
     res = ina226_get_mode(&gs_handle, &chip_mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mode %s.\n", chip_mode == INA226_MODE_SHUTDOWN ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查模式 %s。\n", chip_mode == INA226_MODE_SHUTDOWN ? "ok" : "error");
     
-    /* set shunt voltage continuous */
+    /* 设置分流电压连续模式 */
     res = ina226_set_mode(&gs_handle, INA226_MODE_SHUNT_VOLTAGE_CONTINUOUS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set mode shunt voltage continuous.\n");
+    ina226_interface_debug_print("ina226: 设置模式分流电压连续。\n");
     res = ina226_get_mode(&gs_handle, &chip_mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mode %s.\n", chip_mode == INA226_MODE_SHUNT_VOLTAGE_CONTINUOUS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查模式 %s。\n", chip_mode == INA226_MODE_SHUNT_VOLTAGE_CONTINUOUS ? "ok" : "error");
     
-    /* set bus voltage continuous */
+    /* 设置总线电压连续模式 */
     res = ina226_set_mode(&gs_handle, INA226_MODE_BUS_VOLTAGE_CONTINUOUS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set mode bus voltage continuous.\n");
+    ina226_interface_debug_print("ina226: 设置模式总线电压连续。\n");
     res = ina226_get_mode(&gs_handle, &chip_mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mode %s.\n", chip_mode == INA226_MODE_BUS_VOLTAGE_CONTINUOUS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查模式 %s。\n", chip_mode == INA226_MODE_BUS_VOLTAGE_CONTINUOUS ? "ok" : "error");
     
-    /* set shunt and bus voltage continuous */
+    /* 设置分流和总线电压连续模式 */
     res = ina226_set_mode(&gs_handle, INA226_MODE_SHUNT_BUS_VOLTAGE_CONTINUOUS);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mode failed.\n");
+        ina226_interface_debug_print("ina226: 设置模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set mode shunt and bus voltage continuous.\n");
+    ina226_interface_debug_print("ina226: 设置模式分流和总线电压连续。\n");
     res = ina226_get_mode(&gs_handle, &chip_mode);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mode failed.\n");
+        ina226_interface_debug_print("ina226: 获取模式失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mode %s.\n", chip_mode == INA226_MODE_SHUNT_BUS_VOLTAGE_CONTINUOUS ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查模式 %s。\n", chip_mode == INA226_MODE_SHUNT_BUS_VOLTAGE_CONTINUOUS ? "ok" : "error");
     
-    /* ina226_set_calibration/ina226_get_calibration test */
-    ina226_interface_debug_print("ina226: ina226_set_calibration/ina226_get_calibration test.\n");
+    /* ina226_set_calibration/ina226_get_calibration 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_calibration/ina226_get_calibration 测试。\n");
     
     data = rand() % 0x7FFFU;
     res = ina226_set_calibration(&gs_handle, data);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set calibration failed.\n");
+        ina226_interface_debug_print("ina226: 设置校准值失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set calibration 0x%04X.\n", data);
+    ina226_interface_debug_print("ina226: 设置校准值 0x%04X。\n", data);
     res = ina226_get_calibration(&gs_handle, &data_check);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get calibration failed.\n");
+        ina226_interface_debug_print("ina226: 获取校准值失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check calibration %s.\n", data == data_check ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查校准值 %s。\n", data == data_check ? "ok" : "error");
     
-    /* ina226_calculate_calibration test */
-    ina226_interface_debug_print("ina226: ina226_calculate_calibration test.\n");
+    /* ina226_calculate_calibration 测试 */
+    ina226_interface_debug_print("ina226: ina226_calculate_calibration 测试。\n");
     
-    /* calculate calibration */
+    /* 计算校准值 */
     res = ina226_calculate_calibration(&gs_handle, &data_check);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: calculate calibration failed.\n");
+        ina226_interface_debug_print("ina226: 计算校准值失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: calculate calibration is 0x%04X.\n", data_check);
+    ina226_interface_debug_print("ina226: 计算校准值为 0x%04X。\n", data_check);
     
-    /* ina226_set_mask/ina226_get_mask test */
-    ina226_interface_debug_print("ina226: ina226_set_mask/ina226_get_mask test.\n");
+    /* ina226_set_mask/ina226_get_mask 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_mask/ina226_get_mask 测试。\n");
     
-    /* enable shunt voltage over voltage */
+    /* 使能分流电压过压 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_SHUNT_VOLTAGE_OVER_VOLTAGE, INA226_BOOL_TRUE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: enable shunt voltage over voltage.\n");
+    ina226_interface_debug_print("ina226: 使能分流电压过压。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_SHUNT_VOLTAGE_OVER_VOLTAGE, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
     
-    /* disable shunt voltage over voltage */
+    /* 禁用分流电压过压 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_SHUNT_VOLTAGE_OVER_VOLTAGE, INA226_BOOL_FALSE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: disable shunt voltage over voltage.\n");
+    ina226_interface_debug_print("ina226: 禁用分流电压过压。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_SHUNT_VOLTAGE_OVER_VOLTAGE, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
     
-    /* enable shunt voltage under voltage */
+    /* 使能分流电压欠压 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_SHUNT_VOLTAGE_UNDER_VOLTAGE, INA226_BOOL_TRUE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: enable shunt voltage under voltage.\n");
+    ina226_interface_debug_print("ina226: 使能分流电压欠压。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_SHUNT_VOLTAGE_UNDER_VOLTAGE, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
     
-    /* disable shunt voltage under voltage */
+    /* 禁用分流电压欠压 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_SHUNT_VOLTAGE_UNDER_VOLTAGE, INA226_BOOL_FALSE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: disable shunt voltage under voltage.\n");
+    ina226_interface_debug_print("ina226: 禁用分流电压欠压。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_SHUNT_VOLTAGE_UNDER_VOLTAGE, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
     
-    /* enable bus voltage over voltage */
+    /* 使能总线电压过压 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_BUS_VOLTAGE_OVER_VOLTAGE, INA226_BOOL_TRUE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: enable bus voltage over voltage.\n");
+    ina226_interface_debug_print("ina226: 使能总线电压过压。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_BUS_VOLTAGE_OVER_VOLTAGE, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
     
-    /* disable bus voltage over voltage */
+    /* 禁用总线电压过压 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_BUS_VOLTAGE_OVER_VOLTAGE, INA226_BOOL_FALSE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: disable bus voltage over voltage.\n");
+    ina226_interface_debug_print("ina226: 禁用总线电压过压。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_BUS_VOLTAGE_OVER_VOLTAGE, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
     
-    /* enable bus voltage under voltage */
+    /* 使能总线电压欠压 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_BUS_VOLTAGE_UNDER_VOLTAGE, INA226_BOOL_TRUE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: enable bus voltage under voltage.\n");
+    ina226_interface_debug_print("ina226: 使能总线电压欠压。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_BUS_VOLTAGE_UNDER_VOLTAGE, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
     
-    /* disable bus voltage under voltage */
+    /* 禁用总线电压欠压 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_BUS_VOLTAGE_UNDER_VOLTAGE, INA226_BOOL_FALSE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: disable bus voltage under voltage.\n");
+    ina226_interface_debug_print("ina226: 禁用总线电压欠压。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_BUS_VOLTAGE_UNDER_VOLTAGE, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
     
-    /* enable power over limit */
+    /* 使能功率超限 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_POWER_OVER_LIMIT, INA226_BOOL_TRUE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: enable power over limit.\n");
+    ina226_interface_debug_print("ina226: 使能功率超限。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_POWER_OVER_LIMIT, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
     
-    /* disable power over limit */
+    /* 禁用功率超限 */
     res = ina226_set_mask(&gs_handle, INA226_MASK_POWER_OVER_LIMIT, INA226_BOOL_FALSE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set mask failed.\n");
+        ina226_interface_debug_print("ina226: 设置掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: disable power over limit.\n");
+    ina226_interface_debug_print("ina226: 禁用功率超限。\n");
     res = ina226_get_mask(&gs_handle, INA226_MASK_POWER_OVER_LIMIT, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get mask failed.\n");
+        ina226_interface_debug_print("ina226: 获取掩码失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check mask %s.\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查掩码 %s。\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
     
-    /* ina226_set_conversion_ready_alert_pin/ina226_get_conversion_ready_alert_pin test */
-    ina226_interface_debug_print("ina226: ina226_set_conversion_ready_alert_pin/ina226_get_conversion_ready_alert_pin test.\n");
+    /* ina226_set_conversion_ready_alert_pin/ina226_get_conversion_ready_alert_pin 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_conversion_ready_alert_pin/ina226_get_conversion_ready_alert_pin 测试。\n");
     
-    /* enable conversion ready alert pin */
+    /* 使能转换就绪告警引脚 */
     res = ina226_set_conversion_ready_alert_pin(&gs_handle, INA226_BOOL_TRUE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set conversion ready alert pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置转换就绪告警引脚失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: enable conversion ready alert pin.\n");
+    ina226_interface_debug_print("ina226: 使能转换就绪告警引脚。\n");
     res = ina226_get_conversion_ready_alert_pin(&gs_handle, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get conversion ready alert pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取转换就绪告警引脚失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check conversion ready alert pin %s.\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查转换就绪告警引脚 %s。\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
     
-    /* disable conversion ready alert pin */
+    /* 禁用转换就绪告警引脚 */
     res = ina226_set_conversion_ready_alert_pin(&gs_handle, INA226_BOOL_FALSE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set conversion ready alert pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置转换就绪告警引脚失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: disable conversion ready alert pin.\n");
+    ina226_interface_debug_print("ina226: 禁用转换就绪告警引脚。\n");
     res = ina226_get_conversion_ready_alert_pin(&gs_handle, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get conversion ready alert pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取转换就绪告警引脚失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check conversion ready alert pin %s.\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查转换就绪告警引脚 %s。\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
     
-    /* ina226_set_alert_polarity_pin/ina226_get_alert_polarity_pin test */
-    ina226_interface_debug_print("ina226: ina226_set_alert_polarity_pin/ina226_get_alert_polarity_pin test.\n");
+    /* ina226_set_alert_polarity_pin/ina226_get_alert_polarity_pin 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_alert_polarity_pin/ina226_get_alert_polarity_pin 测试。\n");
     
-    /* set alert polarity pin normal */
+    /* 设置告警极性引脚为正常 */
     res = ina226_set_alert_polarity_pin(&gs_handle, INA226_ALERT_POLARITY_NORMAL);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set alert polarity pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置告警极性引脚失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set alert polarity pin normal.\n");
+    ina226_interface_debug_print("ina226: 设置告警极性引脚正常。\n");
     res = ina226_get_alert_polarity_pin(&gs_handle, &pin);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get alert polarity pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取告警极性引脚失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check alert polarity pin %s.\n", pin == INA226_ALERT_POLARITY_NORMAL ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查告警极性引脚 %s。\n", pin == INA226_ALERT_POLARITY_NORMAL ? "ok" : "error");
     
-    /* set alert polarity pin inverted */
+    /* 设置告警极性引脚为反向 */
     res = ina226_set_alert_polarity_pin(&gs_handle, INA226_ALERT_POLARITY_INVERTED);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set alert polarity pin failed.\n");
+        ina226_interface_debug_print("ina226: 设置告警极性引脚失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set alert polarity pin inverted.\n");
+    ina226_interface_debug_print("ina226: 设置告警极性引脚反向。\n");
     res = ina226_get_alert_polarity_pin(&gs_handle, &pin);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get alert polarity pin failed.\n");
+        ina226_interface_debug_print("ina226: 获取告警极性引脚失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check alert polarity pin %s.\n", pin == INA226_ALERT_POLARITY_INVERTED ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查告警极性引脚 %s。\n", pin == INA226_ALERT_POLARITY_INVERTED ? "ok" : "error");
     
-    /* ina226_set_alert_latch/ina226_get_alert_latch test */
-    ina226_interface_debug_print("ina226: ina226_set_alert_latch/ina226_get_alert_latch test.\n");
+    /* ina226_set_alert_latch/ina226_get_alert_latch 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_alert_latch/ina226_get_alert_latch 测试。\n");
     
-    /* enable alert latch */
+    /* 使能告警锁存 */
     res = ina226_set_alert_latch(&gs_handle, INA226_BOOL_TRUE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set alert latch failed.\n");
+        ina226_interface_debug_print("ina226: 设置告警锁存失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: enable alert latch.\n");
+    ina226_interface_debug_print("ina226: 使能告警锁存。\n");
     res = ina226_get_alert_latch(&gs_handle, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get alert latch failed.\n");
+        ina226_interface_debug_print("ina226: 获取告警锁存失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check alert latch %s.\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查告警锁存 %s。\n", enable == INA226_BOOL_TRUE ? "ok" : "error");
     
-    /* disable alert latch */
+    /* 禁用告警锁存 */
     res = ina226_set_alert_latch(&gs_handle, INA226_BOOL_FALSE);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set alert latch failed.\n");
+        ina226_interface_debug_print("ina226: 设置告警锁存失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: disable alert latch.\n");
+    ina226_interface_debug_print("ina226: 禁用告警锁存。\n");
     res = ina226_get_alert_latch(&gs_handle, &enable);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get alert latch failed.\n");
+        ina226_interface_debug_print("ina226: 获取告警锁存失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check alert latch %s.\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查告警锁存 %s。\n", enable == INA226_BOOL_FALSE ? "ok" : "error");
     
-    /* ina226_set_alert_limit/ina226_get_alert_limit test */
-    ina226_interface_debug_print("ina226: ina226_set_alert_limit/ina226_get_alert_limit test.\n");
+    /* ina226_set_alert_limit/ina226_get_alert_limit 测试 */
+    ina226_interface_debug_print("ina226: ina226_set_alert_limit/ina226_get_alert_limit 测试。\n");
     
     data = rand() % 0xFFFFU;
     res = ina226_set_alert_limit(&gs_handle, data);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: set alert limit failed.\n");
+        ina226_interface_debug_print("ina226: 设置告警阈值失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set alert limit 0x%04X.\n", data);
+    ina226_interface_debug_print("ina226: 设置告警阈值 0x%04X。\n", data);
     res = ina226_get_alert_limit(&gs_handle, &data_check);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get alert limit failed.\n");
+        ina226_interface_debug_print("ina226: 获取告警阈值失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check alert limit %s.\n", data == data_check ? "ok" : "error");
+    ina226_interface_debug_print("ina226: 检查告警阈值 %s。\n", data == data_check ? "ok" : "error");
     
-    /* ina226_shunt_voltage_convert_to_register/ina226_shunt_voltage_convert_to_data test */
-    ina226_interface_debug_print("ina226: ina226_shunt_voltage_convert_to_register/ina226_shunt_voltage_convert_to_data test.\n");
+    /* ina226_shunt_voltage_convert_to_register/ina226_shunt_voltage_convert_to_data 测试 */
+    ina226_interface_debug_print("ina226: ina226_shunt_voltage_convert_to_register/ina226_shunt_voltage_convert_to_data 测试。\n");
     
     f = (float)(rand() % 1000) / 100.0f;
     res = ina226_shunt_voltage_convert_to_register(&gs_handle, f, &data);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: shunt voltage convert to register failed.\n");
+        ina226_interface_debug_print("ina226: 分流电压转换为寄存器失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set shunt voltage %0.2fmV.\n", f);
+    ina226_interface_debug_print("ina226: 设置分流电压 %0.2fmV。\n", f);
     res = ina226_shunt_voltage_convert_to_data(&gs_handle, data, &f_check);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: shunt voltage convert to data failed.\n");
+        ina226_interface_debug_print("ina226: 分流电压转换为数据失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check shunt voltage %0.2fmV.\n", f_check);
+    ina226_interface_debug_print("ina226: 检查分流电压 %0.2fmV。\n", f_check);
     
-    /* ina226_bus_voltage_convert_to_register/ina226_bus_voltage_convert_to_data test */
-    ina226_interface_debug_print("ina226: ina226_bus_voltage_convert_to_register/ina226_bus_voltage_convert_to_data test.\n");
+    /* ina226_bus_voltage_convert_to_register/ina226_bus_voltage_convert_to_data 测试 */
+    ina226_interface_debug_print("ina226: ina226_bus_voltage_convert_to_register/ina226_bus_voltage_convert_to_data 测试。\n");
     
     f = (float)(rand() % 1000) / 100.0f;
     res = ina226_bus_voltage_convert_to_register(&gs_handle, f, &data);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: bus voltage convert to register failed.\n");
+        ina226_interface_debug_print("ina226: 总线电压转换为寄存器失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set bus voltage %0.2fmV.\n", f);
+    ina226_interface_debug_print("ina226: 设置总线电压 %0.2fmV。\n", f);
     res = ina226_bus_voltage_convert_to_data(&gs_handle, data, &f_check);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: bus voltage convert to data failed.\n");
+        ina226_interface_debug_print("ina226: 总线电压转换为数据失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check bus voltage %0.2fmV.\n", f_check);
+    ina226_interface_debug_print("ina226: 检查总线电压 %0.2fmV。\n", f_check);
     
-    /* ina226_power_convert_to_register/ina226_power_convert_to_data test */
-    ina226_interface_debug_print("ina226: ina226_power_convert_to_register/ina226_power_convert_to_data test.\n");
+    /* ina226_power_convert_to_register/ina226_power_convert_to_data 测试 */
+    ina226_interface_debug_print("ina226: ina226_power_convert_to_register/ina226_power_convert_to_data 测试。\n");
     
     f = (float)(rand() % 1000) / 100.0f;
     res = ina226_power_convert_to_register(&gs_handle, f, &data);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: power convert to register failed.\n");
+        ina226_interface_debug_print("ina226: 功率转换为寄存器失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: set power %0.2fmW.\n", f);
+    ina226_interface_debug_print("ina226: 设置功率 %0.2fmW。\n", f);
     res = ina226_power_convert_to_data(&gs_handle, data, &f_check);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: power convert to data failed.\n");
+        ina226_interface_debug_print("ina226: 功率转换为数据失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
-    ina226_interface_debug_print("ina226: check power %0.2fmW.\n", f_check);
+    ina226_interface_debug_print("ina226: 检查功率 %0.2fmW。\n", f_check);
     
-    /* ina226_get_die_id test */
-    ina226_interface_debug_print("ina226: ina226_get_die_id test.\n");
+    /* ina226_get_die_id 测试 */
+    ina226_interface_debug_print("ina226: ina226_get_die_id 测试。\n");
     
-    /* get die id */
+    /* 获取芯片ID */
     res = ina226_get_die_id(&gs_handle, &device_id, &die_revision_id);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: get die id failed.\n");
+        ina226_interface_debug_print("ina226: 获取芯片ID失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
     
-    /* output */
-    ina226_interface_debug_print("ina226: device id is 0x%04X.\n", device_id);
+    /* 输出 */
+    ina226_interface_debug_print("ina226: 设备ID是 0x%04X。\n", device_id);
     
-    /* output */
-    ina226_interface_debug_print("ina226: die revision id is 0x%02X.\n", die_revision_id);
+    /* 输出 */
+    ina226_interface_debug_print("ina226: 芯片版本ID是 0x%02X。\n", die_revision_id);
     
-    /* ina226_soft_reset test */
-    ina226_interface_debug_print("ina226: ina226_soft_reset test.\n");
+    /* ina226_soft_reset 测试 */
+    ina226_interface_debug_print("ina226: ina226_soft_reset 测试。\n");
     
-    /* soft reset */
+    /* 软复位 */
     res = ina226_soft_reset(&gs_handle);
     if (res != 0)
     {
-        ina226_interface_debug_print("ina226: soft reset failed.\n");
+        ina226_interface_debug_print("ina226: 软复位失败。\n");
         (void)ina226_deinit(&gs_handle);
         
         return 1;
     }
     
-    /* finish register test */
+    /* 完成寄存器测试 */
     (void)ina226_deinit(&gs_handle);
-    ina226_interface_debug_print("ina226: finish register test.\n");
+    ina226_interface_debug_print("ina226: 完成寄存器测试。\n");
     
     return 0;
 }

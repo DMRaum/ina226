@@ -22,7 +22,7 @@
  * SOFTWARE. 
  *
  * @file      driver_ina226.h
- * @brief     driver ina226 header file
+ * @brief     ina226 驱动头文件
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2025-01-29
@@ -30,7 +30,7 @@
  * <h3>history</h3>
  * <table>
  * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>first upload
+ * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>首次上传
  * </table>
  */
 
@@ -46,8 +46,8 @@ extern "C"{
 #endif
 
 /**
- * @defgroup ina226_driver ina226 driver function
- * @brief    ina226 driver modules
+ * @defgroup ina226_driver ina226 驱动函数
+ * @brief    ina226 驱动模块
  * @{
  */
 
@@ -57,14 +57,14 @@ extern "C"{
  */
 
 /**
- * @brief ina226 read timeout definition
+ * @brief ina226 读取超时定义
  */
 #ifndef INA226_READ_TIMEOUT
-    #define INA226_READ_TIMEOUT    1000        /**< 1000ms */
+    #define INA226_READ_TIMEOUT    1000        /**< 1000 毫秒 */
 #endif
 
 /**
- * @brief ina226 address enumeration definition
+ * @brief ina226 地址枚举定义
  */
 typedef enum
 {
@@ -87,7 +87,7 @@ typedef enum
 } ina226_address_t;
 
 /**
- * @brief ina226 bool enumeration definition
+ * @brief ina226 布尔枚举定义
  */
 typedef enum
 {
@@ -96,18 +96,18 @@ typedef enum
 } ina226_bool_t;
 
 /**
- * @brief ina226 average enumeration definition
+ * @brief ina226 平均采样枚举定义
  */
 typedef enum
 {
-    INA226_AVG_1    = 0,        /**< 1 average */
-    INA226_AVG_4    = 1,        /**< 4 averages */
-    INA226_AVG_16   = 2,        /**< 16 averages */
-    INA226_AVG_64   = 3,        /**< 64 averages */
-    INA226_AVG_128  = 4,        /**< 128 averages */
-    INA226_AVG_256  = 5,        /**< 256 averages */
-    INA226_AVG_512  = 6,        /**< 512 averages */
-    INA226_AVG_1024 = 7,        /**< 1024 averages */
+    INA226_AVG_1    = 0,        /**< 1 次平均 */
+    INA226_AVG_4    = 1,        /**< 4 次平均 */
+    INA226_AVG_16   = 2,        /**< 16 次平均 */
+    INA226_AVG_64   = 3,        /**< 64 次平均 */
+    INA226_AVG_128  = 4,        /**< 128 次平均 */
+    INA226_AVG_256  = 5,        /**< 256 次平均 */
+    INA226_AVG_512  = 6,        /**< 512 次平均 */
+    INA226_AVG_1024 = 7,        /**< 1024 次平均 */
 } ina226_avg_t;
 
 typedef enum
@@ -123,86 +123,86 @@ typedef enum
 } ina226_conversion_time_t;
 
 /**
- * @brief ina226 mode enumeration definition
+ * @brief ina226 模式枚举定义
  */
 typedef enum
 {
-    INA226_MODE_POWER_DOWN                   = 0x0,        /**< power down */
-    INA226_MODE_SHUNT_VOLTAGE_TRIGGERED      = 0x1,        /**< shunt voltage triggered */
-    INA226_MODE_BUS_VOLTAGE_TRIGGERED        = 0x2,        /**< bus voltage triggered */
-    INA226_MODE_SHUNT_BUS_VOLTAGE_TRIGGERED  = 0x3,        /**< shunt and bus triggered */
-    INA226_MODE_SHUTDOWN                     = 0x4,        /**< shutdown */
-    INA226_MODE_SHUNT_VOLTAGE_CONTINUOUS     = 0x5,        /**< shunt voltage continuous */
-    INA226_MODE_BUS_VOLTAGE_CONTINUOUS       = 0x6,        /**< bus voltage continuous */
-    INA226_MODE_SHUNT_BUS_VOLTAGE_CONTINUOUS = 0x7,        /**< shunt and bus voltage continuous */
+    INA226_MODE_POWER_DOWN                   = 0x0,        /**< 断电模式 */
+    INA226_MODE_SHUNT_VOLTAGE_TRIGGERED      = 0x1,        /**< 分流电压触发模式 */
+    INA226_MODE_BUS_VOLTAGE_TRIGGERED        = 0x2,        /**< 总线电压触发模式 */
+    INA226_MODE_SHUNT_BUS_VOLTAGE_TRIGGERED  = 0x3,        /**< 分流和总线电压触发模式 */
+    INA226_MODE_SHUTDOWN                     = 0x4,        /**< 关闭模式 */
+    INA226_MODE_SHUNT_VOLTAGE_CONTINUOUS     = 0x5,        /**< 分流电压连续模式 */
+    INA226_MODE_BUS_VOLTAGE_CONTINUOUS       = 0x6,        /**< 总线电压连续模式 */
+    INA226_MODE_SHUNT_BUS_VOLTAGE_CONTINUOUS = 0x7,        /**< 分流和总线电压连续模式 */
 } ina226_mode_t;
 
 /**
- * @brief ina226 status enumeration definition
+ * @brief ina226 状态枚举定义
  */
 typedef enum
 {
-    INA226_STATUS_SHUNT_VOLTAGE_OVER_VOLTAGE  = 15,        /**< shunt voltage over voltage */
-    INA226_STATUS_SHUNT_VOLTAGE_UNDER_VOLTAGE = 14,        /**< shunt voltage under voltage */
-    INA226_STATUS_BUS_VOLTAGE_OVER_VOLTAGE    = 13,        /**< bus voltage over voltage */
-    INA226_STATUS_BUS_VOLTAGE_UNDER_VOLTAGE   = 12,        /**< bus voltage under voltage */
-    INA226_STATUS_POWER_OVER_LIMIT            = 11,        /**< power over limit */
+    INA226_STATUS_SHUNT_VOLTAGE_OVER_VOLTAGE  = 15,        /**< 分流电压过压 */
+    INA226_STATUS_SHUNT_VOLTAGE_UNDER_VOLTAGE = 14,        /**< 分流电压欠压 */
+    INA226_STATUS_BUS_VOLTAGE_OVER_VOLTAGE    = 13,        /**< 总线电压过压 */
+    INA226_STATUS_BUS_VOLTAGE_UNDER_VOLTAGE   = 12,        /**< 总线电压欠压 */
+    INA226_STATUS_POWER_OVER_LIMIT            = 11,        /**< 功率超限 */
 } ina226_status_t;
 
 /**
- * @brief ina226 mask enumeration definition
+ * @brief ina226 掩码枚举定义
  */
 typedef enum
 {
-    INA226_MASK_SHUNT_VOLTAGE_OVER_VOLTAGE  = 15,        /**< shunt voltage over voltage */
-    INA226_MASK_SHUNT_VOLTAGE_UNDER_VOLTAGE = 14,        /**< shunt voltage under voltage */
-    INA226_MASK_BUS_VOLTAGE_OVER_VOLTAGE    = 13,        /**< bus voltage over voltage */
-    INA226_MASK_BUS_VOLTAGE_UNDER_VOLTAGE   = 12,        /**< bus voltage under voltage */
-    INA226_MASK_POWER_OVER_LIMIT            = 11,        /**< power over limit */
+    INA226_MASK_SHUNT_VOLTAGE_OVER_VOLTAGE  = 15,        /**< 分流电压过压 */
+    INA226_MASK_SHUNT_VOLTAGE_UNDER_VOLTAGE = 14,        /**< 分流电压欠压 */
+    INA226_MASK_BUS_VOLTAGE_OVER_VOLTAGE    = 13,        /**< 总线电压过压 */
+    INA226_MASK_BUS_VOLTAGE_UNDER_VOLTAGE   = 12,        /**< 总线电压欠压 */
+    INA226_MASK_POWER_OVER_LIMIT            = 11,        /**< 功率超限 */
 } ina226_mask_t;
 
 /**
- * @brief ina226 alert polarity enumeration definition
+ * @brief ina226 告警极性枚举定义
  */
 typedef enum
 {
-    INA226_ALERT_POLARITY_NORMAL   = 0,        /**< active low open collector */
-    INA226_ALERT_POLARITY_INVERTED = 1,        /**< active high open collector */
+    INA226_ALERT_POLARITY_NORMAL   = 0,        /**< 低电平有效开漏输出 */
+    INA226_ALERT_POLARITY_INVERTED = 1,        /**< 高电平有效开漏输出 */
 } ina226_alert_polarity_t;
 
 /**
- * @brief ina226 handle structure definition
+ * @brief ina226 句柄结构体定义
  */
 typedef struct ina226_handle_s
 {
-    uint8_t iic_addr;                                                                   /**< iic device address */
-    uint8_t (*iic_init)(void);                                                          /**< point to an iic_init function address */
-    uint8_t (*iic_deinit)(void);                                                        /**< point to an iic_deinit function address */
-    uint8_t (*iic_read)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);         /**< point to an iic_read function address */
-    uint8_t (*iic_write)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);        /**< point to an iic_write function address */
-    void (*delay_ms)(uint32_t ms);                                                      /**< point to a delay_ms function address */
-    void (*debug_print)(const char *const fmt, ...);                                    /**< point to a debug_print function address */
-    void (*receive_callback)(uint8_t type);                                             /**< point to a receive_callback function address */
-    double r;                                                                           /**< resistance */
-    double current_lsb;                                                                 /**< current lsb */
-    uint8_t inited;                                                                     /**< inited flag */
-    uint8_t trigger;                                                                    /**< trigger flag */
+    uint8_t iic_addr;                                                                   /**< IIC 设备地址 */
+    uint8_t (*iic_init)(void);                                                          /**< 指向 iic_init 函数的地址 */
+    uint8_t (*iic_deinit)(void);                                                        /**< 指向 iic_deinit 函数的地址 */
+    uint8_t (*iic_read)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);         /**< 指向 iic_read 函数的地址 */
+    uint8_t (*iic_write)(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len);        /**< 指向 iic_write 函数的地址 */
+    void (*delay_ms)(uint32_t ms);                                                      /**< 指向 delay_ms 函数的地址 */
+    void (*debug_print)(const char *const fmt, ...);                                    /**< 指向 debug_print 函数的地址 */
+    void (*receive_callback)(uint8_t type);                                             /**< 指向 receive_callback 函数的地址 */
+    double r;                                                                           /**< 电阻值 */
+    double current_lsb;                                                                 /**< 电流最小有效位 */
+    uint8_t inited;                                                                     /**< 初始化标志 */
+    uint8_t trigger;                                                                    /**< 触发标志 */
 } ina226_handle_t;
 
 /**
- * @brief ina226 information structure definition
+ * @brief ina226 信息结构体定义
  */
 typedef struct ina226_info_s
 {
-    char chip_name[32];                /**< chip name */
-    char manufacturer_name[32];        /**< manufacturer name */
-    char interface[8];                 /**< chip interface name */
-    float supply_voltage_min_v;        /**< chip min supply voltage */
-    float supply_voltage_max_v;        /**< chip max supply voltage */
-    float max_current_ma;              /**< chip max current */
-    float temperature_min;             /**< chip min operating temperature */
-    float temperature_max;             /**< chip max operating temperature */
-    uint32_t driver_version;           /**< driver version */
+    char chip_name[32];                /**< 芯片名称 */
+    char manufacturer_name[32];        /**< 制造商名称 */
+    char interface[8];                 /**< 芯片接口名称 */
+    float supply_voltage_min_v;        /**< 芯片最小供电电压 */
+    float supply_voltage_max_v;        /**< 芯片最大供电电压 */
+    float max_current_ma;              /**< 芯片最大电流 */
+    float temperature_min;             /**< 芯片最小工作温度 */
+    float temperature_max;             /**< 芯片最大工作温度 */
+    uint32_t driver_version;           /**< 驱动版本 */
 } ina226_info_t;
 
 /**
@@ -210,73 +210,73 @@ typedef struct ina226_info_s
  */
 
 /**
- * @defgroup ina226_link_driver ina226 link driver function
- * @brief    ina226 link driver modules
+ * @defgroup ina226_link_driver ina226 链接驱动函数
+ * @brief    ina226 链接驱动模块
  * @ingroup  ina226_driver
  * @{
  */
 
 /**
- * @brief     initialize ina226_handle_t structure
- * @param[in] HANDLE pointer to an ina226 handle structure
+ * @brief     初始化 ina226_handle_t 结构体
+ * @param[in] HANDLE 指向 ina226 句柄结构的指针
  * @param[in] STRUCTURE ina226_handle_t
- * @note      none
+ * @note      无
  */
 #define DRIVER_INA226_LINK_INIT(HANDLE, STRUCTURE)         memset(HANDLE, 0, sizeof(STRUCTURE))
 
 /**
- * @brief     link iic_init function
- * @param[in] HANDLE pointer to an ina226 handle structure
- * @param[in] FUC pointer to an iic_init function address
- * @note      none
+ * @brief     链接 iic_init 函数
+ * @param[in] HANDLE 指向 ina226 句柄结构的指针
+ * @param[in] FUC 指向 iic_init 函数的地址
+ * @note      无
  */
 #define DRIVER_INA226_LINK_IIC_INIT(HANDLE, FUC)          (HANDLE)->iic_init = FUC
 
 /**
- * @brief     link iic_deinit function
- * @param[in] HANDLE pointer to an ina226 handle structure
- * @param[in] FUC pointer to an iic_deinit function address
- * @note      none
+ * @brief     链接 iic_deinit 函数
+ * @param[in] HANDLE 指向 ina226 句柄结构的指针
+ * @param[in] FUC 指向 iic_deinit 函数的地址
+ * @note      无
  */
 #define DRIVER_INA226_LINK_IIC_DEINIT(HANDLE, FUC)        (HANDLE)->iic_deinit = FUC
 
 /**
- * @brief     link iic_read function
- * @param[in] HANDLE pointer to an ina226 handle structure
- * @param[in] FUC pointer to an iic_read function address
- * @note      none
+ * @brief     链接 iic_read 函数
+ * @param[in] HANDLE 指向 ina226 句柄结构的指针
+ * @param[in] FUC 指向 iic_read 函数的地址
+ * @note      无
  */
 #define DRIVER_INA226_LINK_IIC_READ(HANDLE, FUC)          (HANDLE)->iic_read = FUC
 
 /**
- * @brief     link iic_write function
- * @param[in] HANDLE pointer to an ina226 handle structure
- * @param[in] FUC pointer to an iic_write function address
- * @note      none
+ * @brief     链接 iic_write 函数
+ * @param[in] HANDLE 指向 ina226 句柄结构的指针
+ * @param[in] FUC 指向 iic_write 函数的地址
+ * @note      无
  */
 #define DRIVER_INA226_LINK_IIC_WRITE(HANDLE, FUC)         (HANDLE)->iic_write = FUC
 
 /**
- * @brief     link delay_ms function
- * @param[in] HANDLE pointer to an ina226 handle structure
- * @param[in] FUC pointer to a delay_ms function address
- * @note      none
+ * @brief     链接 delay_ms 函数
+ * @param[in] HANDLE 指向 ina226 句柄结构的指针
+ * @param[in] FUC 指向 delay_ms 函数的地址
+ * @note      无
  */
 #define DRIVER_INA226_LINK_DELAY_MS(HANDLE, FUC)          (HANDLE)->delay_ms = FUC
 
 /**
- * @brief     link debug_print function
- * @param[in] HANDLE pointer to an ina226 handle structure
- * @param[in] FUC pointer to a debug_print function address
- * @note      none
+ * @brief     链接 debug_print 函数
+ * @param[in] HANDLE 指向 ina226 句柄结构的指针
+ * @param[in] FUC 指向 debug_print 函数的地址
+ * @note      无
  */
 #define DRIVER_INA226_LINK_DEBUG_PRINT(HANDLE, FUC)       (HANDLE)->debug_print = FUC
 
 /**
- * @brief     link receive_callback function
- * @param[in] HANDLE pointer to an ina226 handle structure
- * @param[in] FUC pointer to a receive_callback function address
- * @note      none
+ * @brief     链接 receive_callback 函数
+ * @param[in] HANDLE 指向 ina226 句柄结构的指针
+ * @param[in] FUC 指向 receive_callback 函数的地址
+ * @note      无
  */
 #define DRIVER_INA226_LINK_RECEIVE_CALLBACK(HANDLE, FUC)  (HANDLE)->receive_callback = FUC
 
@@ -285,546 +285,546 @@ typedef struct ina226_info_s
  */
 
 /**
- * @defgroup ina226_basic_driver ina226 basic driver function
- * @brief    ina226 basic driver modules
+ * @defgroup ina226_basic_driver ina226 基本驱动函数
+ * @brief    ina226 基本驱动模块
  * @ingroup  ina226_driver
  * @{
  */
 
 /**
- * @brief      get chip's information
- * @param[out] *info pointer to an ina226 info structure
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- * @note       none
+ * @brief      获取芯片信息
+ * @param[out] *info 指向 ina226 信息结构的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ * @note       无
  */
 uint8_t ina226_info(ina226_info_t *info);
 
 /**
- * @brief     set the iic address pin
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] addr_pin address pin
- * @return    status code
- *            - 0 success
- *            - 2 handle is NULL
- * @note      none
+ * @brief     设置 IIC 地址引脚
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] addr_pin 地址引脚
+ * @return    状态码
+ *            - 0 成功
+ *            - 2 句柄为 NULL
+ * @note      无
  */
 uint8_t ina226_set_addr_pin(ina226_handle_t *handle, ina226_address_t addr_pin);
 
 /**
- * @brief      get the iic address pin
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *addr_pin pointer to an address pin buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- * @note       none
+ * @brief      获取 IIC 地址引脚
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *addr_pin 指向地址引脚缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ * @note       无
  */
 uint8_t ina226_get_addr_pin(ina226_handle_t *handle, ina226_address_t *addr_pin);
 
 /**
- * @brief     set the resistance
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] resistance current sampling resistance value
- * @return    status code
- *            - 0 success
- *            - 2 handle is NULL
- * @note      none
+ * @brief     设置电阻值
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] resistance 电流采样电阻值
+ * @return    状态码
+ *            - 0 成功
+ *            - 2 句柄为 NULL
+ * @note      无
  */
 uint8_t ina226_set_resistance(ina226_handle_t *handle, double resistance);
 
 /**
- * @brief      get the resistance
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *resistance pointer to a current sampling resistance value buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- * @note       none
+ * @brief      获取电阻值
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *resistance 指向电流采样电阻值缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ * @note       无
  */
 uint8_t ina226_get_resistance(ina226_handle_t *handle, double *resistance);
 
 /**
- * @brief     irq handler
- * @param[in] *handle pointer to an ina226 handle structure
- * @return    status code
- *            - 0 success
- *            - 1 run failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     中断处理函数
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 运行失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_irq_handler(ina226_handle_t *handle);
 
 /**
- * @brief     initialize the chip
- * @param[in] *handle pointer to an ina226 handle structure
- * @return    status code
- *            - 0 success
- *            - 1 iic initialization failed
- *            - 2 handle is NULL
- *            - 3 linked functions is NULL
- *            - 4 id is invalid
- *            - 5 soft reset failed
- * @note      none
+ * @brief     初始化芯片
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 IIC 初始化失败
+ *            - 2 句柄为 NULL
+ *            - 3 链接函数为 NULL
+ *            - 4 ID 无效
+ *            - 5 软复位失败
+ * @note      无
  */
 uint8_t ina226_init(ina226_handle_t *handle);
 
 /**
- * @brief     close the chip
- * @param[in] *handle pointer to an ina226 handle structure
- * @return    status code
- *            - 0 success
- *            - 1 iic deinit failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- *            - 4 power down failed
- * @note      none
+ * @brief     关闭芯片
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 IIC 反初始化失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ *            - 4 断电失败
+ * @note      无
  */
 uint8_t ina226_deinit(ina226_handle_t *handle);
 
 /**
- * @brief     soft reset the chip
- * @param[in] *handle pointer to an ina226 handle structure
- * @return    status code
- *            - 0 success
- *            - 1 soft reset failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     软复位芯片
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 软复位失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_soft_reset(ina226_handle_t *handle);
 
 /**
- * @brief     set average mode
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] mode average mode
- * @return    status code
- *            - 0 success
- *            - 1 set average mode failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     设置平均采样模式
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] mode 平均采样模式
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置平均采样模式失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_average_mode(ina226_handle_t *handle, ina226_avg_t mode);
 
 /**
- * @brief      get average mode
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *mode pointer to an average mode buffer
- * @return     status code
- *             - 0 success
- *             - 1 get average mode failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取平均采样模式
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *mode 指向平均采样模式缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取平均采样模式失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_average_mode(ina226_handle_t *handle, ina226_avg_t *mode);
 
 /**
- * @brief     set bus voltage conversion time
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] t conversion time
- * @return    status code
- *            - 0 success
- *            - 1 set bus voltage conversion time failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     设置总线电压转换时间
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] t 转换时间
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置总线电压转换时间失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_bus_voltage_conversion_time(ina226_handle_t *handle, ina226_conversion_time_t t);
 
 /**
- * @brief      get bus voltage conversion time
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *t pointer to a conversion time buffer
- * @return     status code
- *             - 0 success
- *             - 1 get bus voltage conversion time failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取总线电压转换时间
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *t 指向转换时间缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取总线电压转换时间失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_bus_voltage_conversion_time(ina226_handle_t *handle, ina226_conversion_time_t *t);
 
 /**
- * @brief     set shunt voltage conversion time
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] t conversion time
- * @return    status code
- *            - 0 success
- *            - 1 set shunt voltage conversion time failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     设置分流电压转换时间
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] t 转换时间
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置分流电压转换时间失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_shunt_voltage_conversion_time(ina226_handle_t *handle, ina226_conversion_time_t t);
 
 /**
- * @brief      get shunt voltage conversion time
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *t pointer to a conversion time buffer
- * @return     status code
- *             - 0 success
- *             - 1 get shunt voltage conversion time failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取分流电压转换时间
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *t 指向转换时间缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取分流电压转换时间失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_shunt_voltage_conversion_time(ina226_handle_t *handle, ina226_conversion_time_t *t);
 
 /**
- * @brief     set the mode
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] mode chip mode
- * @return    status code
- *            - 0 success
- *            - 1 set mode failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     设置工作模式
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] mode 芯片工作模式
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置模式失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_mode(ina226_handle_t *handle, ina226_mode_t mode);
 
 /**
- * @brief      get the mode
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *mode pointer to a chip mode buffer
- * @return     status code
- *             - 0 success
- *             - 1 get mode failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取工作模式
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *mode 指向芯片工作模式缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取模式失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_mode(ina226_handle_t *handle, ina226_mode_t *mode);
 
 /**
- * @brief      read the shunt voltage
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *raw pointer to raw data buffer
- * @param[out] *mV pointer to converted data buffer
- * @return     status code
- *             - 0 success
- *             - 1 read shunt voltage failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- *             - 4 math overflow
- *             - 5 read timeout
- * @note       none
+ * @brief      读取分流电压
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *raw 指向原始数据缓冲区的指针
+ * @param[out] *mV 指向转换数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取分流电压失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ *             - 4 数学溢出
+ *             - 5 读取超时
+ * @note       无
  */
 uint8_t ina226_read_shunt_voltage(ina226_handle_t *handle, int16_t *raw, float *mV);
 
 /**
- * @brief      read the bus voltage
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *raw pointer to raw data buffer
- * @param[out] *mV pointer to converted data buffer
- * @return     status code
- *             - 0 success
- *             - 1 read bus voltage failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- *             - 4 math overflow
- *             - 5 read timeout
- * @note       none
+ * @brief      读取总线电压
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *raw 指向原始数据缓冲区的指针
+ * @param[out] *mV 指向转换数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取总线电压失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ *             - 4 数学溢出
+ *             - 5 读取超时
+ * @note       无
  */
 uint8_t ina226_read_bus_voltage(ina226_handle_t *handle, uint16_t *raw, float *mV);
 
 /**
- * @brief      read the power
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *raw pointer to raw data buffer
- * @param[out] *mW pointer to converted data buffer
- * @return     status code
- *             - 0 success
- *             - 1 read power failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- *             - 4 math overflow
- *             - 5 read timeout
- * @note       none
+ * @brief      读取功率
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *raw 指向原始数据缓冲区的指针
+ * @param[out] *mW 指向转换数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取功率失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ *             - 4 数学溢出
+ *             - 5 读取超时
+ * @note       无
  */
 uint8_t ina226_read_power(ina226_handle_t *handle, uint16_t *raw, float *mW);
 
 /**
- * @brief      read the current
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *raw pointer to raw data buffer
- * @param[out] *mA pointer to converted data buffer
- * @return     status code
- *             - 0 success
- *             - 1 read current failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- *             - 4 math overflow
- *             - 5 read timeout
- * @note       none
+ * @brief      读取电流
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *raw 指向原始数据缓冲区的指针
+ * @param[out] *mA 指向转换数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取电流失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ *             - 4 数学溢出
+ *             - 5 读取超时
+ * @note       无
  */
 uint8_t ina226_read_current(ina226_handle_t *handle, int16_t *raw, float *mA);
 
 /**
- * @brief     set the calibration
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] data calibration data
- * @return    status code
- *            - 0 success
- *            - 1 set calibration failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     设置校准值
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] data 校准数据
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置校准值失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_calibration(ina226_handle_t *handle, uint16_t data);
 
 /**
- * @brief      get the calibration
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *data pointer to a calibration data buffer
- * @return     status code
- *             - 0 success
- *             - 1 get calibration failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取校准值
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *data 指向校准数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取校准值失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_calibration(ina226_handle_t *handle, uint16_t *data);
 
 /**
- * @brief      calculate the calibration
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *calibration pointer to a calibration data buffer
- * @return     status code
- *             - 0 success
- *             - 1 calculate calibration failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- *             - 4 r can't be zero
- * @note       none
+ * @brief      计算校准值
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *calibration 指向校准数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 计算校准值失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ *             - 4 电阻值不能为零
+ * @note       无
  */
 uint8_t ina226_calculate_calibration(ina226_handle_t *handle, uint16_t *calibration);
 
 /**
- * @brief     enable or disable mask
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] mask set mask
- * @param[in] enable bool value
- * @return    status code
- *            - 0 success
- *            - 1 set mask failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     启用或禁用掩码
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] mask 设置的掩码
+ * @param[in] enable 布尔值
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置掩码失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_mask(ina226_handle_t *handle, ina226_mask_t mask, ina226_bool_t enable);
 
 /**
- * @brief      get mask
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[in]  mask set mask
- * @param[out] *enable pointer to a bool value buffer
- * @return     status code
- *             - 0 success
- *             - 1 get mask failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取掩码
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[in]  mask 设置的掩码
+ * @param[out] *enable 指向布尔值缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取掩码失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_mask(ina226_handle_t *handle, ina226_mask_t mask, ina226_bool_t *enable);
 
 /**
- * @brief     enable or disable conversion ready alert pin
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] enable bool value
- * @return    status code
- *            - 0 success
- *            - 1 set conversion ready alert pin failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     启用或禁用转换完成告警引脚
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] enable 布尔值
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置转换完成告警引脚失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_conversion_ready_alert_pin(ina226_handle_t *handle, ina226_bool_t enable);
 
 /**
- * @brief      get conversion ready alert pin status
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *enable pointer to a bool value buffer
- * @return     status code
- *             - 0 success
- *             - 1 get conversion ready alert pin failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取转换完成告警引脚状态
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *enable 指向布尔值缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取转换完成告警引脚失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_conversion_ready_alert_pin(ina226_handle_t *handle, ina226_bool_t *enable);
 
 /**
- * @brief     set alert polarity pin
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] pin alert polarity pin
- * @return    status code
- *            - 0 success
- *            - 1 set alert polarity pin failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     设置告警极性引脚
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] pin 告警极性引脚
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置告警极性引脚失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_alert_polarity_pin(ina226_handle_t *handle, ina226_alert_polarity_t pin);
 
 /**
- * @brief      get alert polarity pin
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *pin pointer to an alert polarity pin buffer
- * @return     status code
- *             - 0 success
- *             - 1 get alert polarity pin failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取告警极性引脚
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *pin 指向告警极性引脚缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取告警极性引脚失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_alert_polarity_pin(ina226_handle_t *handle, ina226_alert_polarity_t *pin);
 
 /**
- * @brief     enable or disable alert latch
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] enable bool value
- * @return    status code
- *            - 0 success
- *            - 1 set alert latch failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     启用或禁用告警锁存
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] enable 布尔值
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置告警锁存失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_alert_latch(ina226_handle_t *handle, ina226_bool_t enable);
 
 /**
- * @brief      get alert latch status
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *enable pointer to a bool value buffer
- * @return     status code
- *             - 0 success
- *             - 1 get alert latch failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取告警锁存状态
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *enable 指向布尔值缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取告警锁存失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_alert_latch(ina226_handle_t *handle, ina226_bool_t *enable);
 
 /**
- * @brief     set alert limit
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] reg set register
- * @return    status code
- *            - 0 success
- *            - 1 set alert limit failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     设置告警阈值
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] reg 设置的寄存器值
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 设置告警阈值失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_alert_limit(ina226_handle_t *handle, uint16_t reg);
 
 /**
- * @brief      get alert limit
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *reg pointer to a register buffer
- * @return     status code
- *             - 0 success
- *             - 1 get alert limit failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取告警阈值
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *reg 指向寄存器缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取告警阈值失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_alert_limit(ina226_handle_t *handle, uint16_t *reg);
 
 /**
- * @brief      convert the shunt voltage to the register raw data
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[in]  mV millivolt
- * @param[out] *reg pointer to a register raw buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      将分流电压转换为寄存器原始数据
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[in]  mV 毫伏值
+ * @param[out] *reg 指向寄存器原始数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_shunt_voltage_convert_to_register(ina226_handle_t *handle, float mV, uint16_t *reg);
 
 /**
- * @brief      convert the register raw data to the shunt voltage
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[in]  reg register raw data
- * @param[out] *mV pointer to a millivolt buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      将寄存器原始数据转换为分流电压
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[in]  reg 寄存器原始数据
+ * @param[out] *mV 指向毫伏值缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_shunt_voltage_convert_to_data(ina226_handle_t *handle, uint16_t reg, float *mV);
 
 /**
- * @brief      convert the bus voltage to the register raw data
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[in]  mV millivolt
- * @param[out] *reg pointer to a register raw buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      将总线电压转换为寄存器原始数据
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[in]  mV 毫伏值
+ * @param[out] *reg 指向寄存器原始数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_bus_voltage_convert_to_register(ina226_handle_t *handle, float mV, uint16_t *reg);
 
 /**
- * @brief      convert the register raw data to the bus voltage
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[in]  reg register raw data
- * @param[out] *mV pointer to a millivolt buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      将寄存器原始数据转换为总线电压
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[in]  reg 寄存器原始数据
+ * @param[out] *mV 指向毫伏值缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_bus_voltage_convert_to_data(ina226_handle_t *handle, uint16_t reg, float *mV);
 
 /**
- * @brief      convert the power to the register raw data
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[in]  mW milliwatt
- * @param[out] *reg pointer to a register raw buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      将功率转换为寄存器原始数据
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[in]  mW 毫瓦值
+ * @param[out] *reg 指向寄存器原始数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_power_convert_to_register(ina226_handle_t *handle, float mW, uint16_t *reg);
 
 /**
- * @brief      convert the register raw data to the power
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[in]  reg register raw data
- * @param[out] *mW pointer to a milliwatt buffer
- * @return     status code
- *             - 0 success
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      将寄存器原始数据转换为功率
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[in]  reg 寄存器原始数据
+ * @param[out] *mW 指向毫瓦值缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_power_convert_to_data(ina226_handle_t *handle, uint16_t reg, float *mW);
 
 /**
- * @brief      get the die id
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[out] *device_id pointer to a device id buffer
- * @param[out] *die_revision_id pointer to a die revision id buffer
- * @return     status code
- *             - 0 success
- *             - 1 get die id failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取芯片 ID
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[out] *device_id 指向设备 ID 缓冲区的指针
+ * @param[out] *die_revision_id 指向芯片修订 ID 缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 获取芯片 ID 失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_die_id(ina226_handle_t *handle, uint16_t *device_id, uint8_t *die_revision_id);
 
@@ -833,37 +833,37 @@ uint8_t ina226_get_die_id(ina226_handle_t *handle, uint16_t *device_id, uint8_t 
  */
 
 /**
- * @defgroup ina226_extern_driver ina226 extern driver function
- * @brief    ina226 extern driver modules
+ * @defgroup ina226_extern_driver ina226 外部驱动函数
+ * @brief    ina226 外部驱动模块
  * @ingroup  ina226_driver
  * @{
  */
 
 /**
- * @brief     set the chip register
- * @param[in] *handle pointer to an ina226 handle structure
- * @param[in] reg register address
- * @param[in] data written data
- * @return    status code
- *            - 0 success
- *            - 1 write failed
- *            - 2 handle is NULL
- *            - 3 handle is not initialized
- * @note      none
+ * @brief     设置芯片寄存器
+ * @param[in] *handle 指向 ina226 句柄结构的指针
+ * @param[in] reg 寄存器地址
+ * @param[in] data 写入的数据
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 写入失败
+ *            - 2 句柄为 NULL
+ *            - 3 句柄未初始化
+ * @note      无
  */
 uint8_t ina226_set_reg(ina226_handle_t *handle, uint8_t reg, uint16_t data);
 
 /**
- * @brief      get the chip register
- * @param[in]  *handle pointer to an ina226 handle structure
- * @param[in]  reg register address
- * @param[out] *data pointer to a data buffer
- * @return     status code
- *             - 0 success
- *             - 1 read failed
- *             - 2 handle is NULL
- *             - 3 handle is not initialized
- * @note       none
+ * @brief      获取芯片寄存器
+ * @param[in]  *handle 指向 ina226 句柄结构的指针
+ * @param[in]  reg 寄存器地址
+ * @param[out] *data 指向数据缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取失败
+ *             - 2 句柄为 NULL
+ *             - 3 句柄未初始化
+ * @note       无
  */
 uint8_t ina226_get_reg(ina226_handle_t *handle, uint8_t reg, uint16_t *data);
 

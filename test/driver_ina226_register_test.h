@@ -22,7 +22,7 @@
  * SOFTWARE. 
  *
  * @file      driver_ina226_register_test.c
- * @brief     driver ina226 register test source file
+ * @brief     ina226 寄存器测试源文件
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2025-01-29
@@ -30,7 +30,7 @@
  * <h3>history</h3>
  * <table>
  * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>first upload
+ * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>首次上传
  * </table>
  */
 
@@ -51,12 +51,12 @@ extern "C"{
  */
 
 /**
- * @brief     register test
- * @param[in] addr_pin iic device address
- * @return    status code
- *            - 0 success
- *            - 1 test failed
- * @note      none
+ * @brief     寄存器测试
+ * @param[in] addr_pin IIC 设备地址
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 测试失败
+ * @note      无
  */
 uint8_t ina226_register_test(ina226_address_t addr_pin);
 

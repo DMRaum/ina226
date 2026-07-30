@@ -22,7 +22,7 @@
  * SOFTWARE. 
  *
  * @file      driver_ina226_alert.c
- * @brief     driver ina226 alert source file
+ * @brief     ina226 告警驱动源文件
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2025-01-29
@@ -30,7 +30,7 @@
  * <h3>history</h3>
  * <table>
  * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>first upload
+ * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>首次上传
  * </table>
  */
 
@@ -49,56 +49,56 @@ extern "C"{
  */
 
 /**
- * @brief ina226 alert example default definition
+ * @brief ina226 告警示例默认定义
  */
-#define INA226_ALERT_DEFAULT_AVG_MODE                             INA226_AVG_16                        /**< 16 averages */
-#define INA226_ALERT_DEFAULT_BUS_VOLTAGE_CONVERSION_TIME          INA226_CONVERSION_TIME_1P1_MS        /**< bus voltage conversion time 1.1 ms */
-#define INA226_ALERT_DEFAULT_SHUNT_VOLTAGE_CONVERSION_TIME        INA226_CONVERSION_TIME_1P1_MS        /**< shunt voltage conversion time 1.1 ms */
-#define INA226_ALERT_DEFAULT_READY_ALERT_PIN                      INA226_BOOL_FALSE                    /**< disable ready alert pin */
-#define INA226_ALERT_DEFAULT_ALERT_POLARITY_NORMAL                INA226_ALERT_POLARITY_NORMAL         /**< alert polarity normal */
-#define INA226_ALERT_DEFAULT_ALERT_LATCH                          INA226_BOOL_FALSE                    /**< disable alert latch */
+#define INA226_ALERT_DEFAULT_AVG_MODE                             INA226_AVG_16                        /**< 16 次平均 */
+#define INA226_ALERT_DEFAULT_BUS_VOLTAGE_CONVERSION_TIME          INA226_CONVERSION_TIME_1P1_MS        /**< 总线电压转换时间 1.1 ms */
+#define INA226_ALERT_DEFAULT_SHUNT_VOLTAGE_CONVERSION_TIME        INA226_CONVERSION_TIME_1P1_MS        /**< 分流电压转换时间 1.1 ms */
+#define INA226_ALERT_DEFAULT_READY_ALERT_PIN                      INA226_BOOL_FALSE                    /**< 禁用就绪告警引脚 */
+#define INA226_ALERT_DEFAULT_ALERT_POLARITY_NORMAL                INA226_ALERT_POLARITY_NORMAL         /**< 告警极性正常 */
+#define INA226_ALERT_DEFAULT_ALERT_LATCH                          INA226_BOOL_FALSE                    /**< 禁用告警锁存 */
 
 /**
- * @brief  alert irq handler
- * @return status code
- *         - 0 success
- *         - 1 run failed
- * @note   none
+ * @brief  告警中断处理函数
+ * @return 状态码
+ *         - 0 成功
+ *         - 1 运行失败
+ * @note   无
  */
 uint8_t ina226_alert_irq_handler(void);
 
 /**
- * @brief     alert example init
- * @param[in] addr_pin iic address pin
- * @param[in] r reference resistor value
- * @param[in] mask set mask
- * @param[in] threshold set threshold
- * @param[in] *callback pointer to a function address
- * @return    status code
- *            - 0 success
- *            - 1 init failed
- * @note      none
+ * @brief     告警示例初始化
+ * @param[in] addr_pin IIC 地址引脚
+ * @param[in] r 参考电阻值
+ * @param[in] mask 设置掩码
+ * @param[in] threshold 设置阈值
+ * @param[in] *callback 指向函数地址的指针
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 初始化失败
+ * @note      无
  */
 uint8_t ina226_alert_init(ina226_address_t addr_pin, double r, ina226_mask_t mask, float threshold, void (*callback)(uint8_t type));
 
 /**
- * @brief  alert example deinit
- * @return status code
- *         - 0 success
- *         - 1 deinit failed
- * @note   none
+ * @brief  告警示例反初始化
+ * @return 状态码
+ *         - 0 成功
+ *         - 1 反初始化失败
+ * @note   无
  */
 uint8_t ina226_alert_deinit(void);
 
 /**
- * @brief      alert example read
- * @param[out] *mV pointer to a mV buffer
- * @param[out] *mA pointer to a mA buffer
- * @param[out] *mW pointer to a mW buffer
- * @return     status code
- *             - 0 success
- *             - 1 read failed
- * @note       none
+ * @brief      告警示例读取
+ * @param[out] *mV 指向 mV 缓冲区的指针
+ * @param[out] *mA 指向 mA 缓冲区的指针
+ * @param[out] *mW 指向 mW 缓冲区的指针
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取失败
+ * @note       无
  */
 uint8_t ina226_alert_read(float *mV, float *mA, float *mW);
 

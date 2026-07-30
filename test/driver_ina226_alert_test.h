@@ -22,7 +22,7 @@
  * SOFTWARE. 
  *
  * @file      driver_ina226_alert_test.c
- * @brief     driver ina226 alert test source file
+ * @brief     ina226 告警测试源文件
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2025-01-29
@@ -30,7 +30,7 @@
  * <h3>history</h3>
  * <table>
  * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>first upload
+ * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>首次上传
  * </table>
  */
 
@@ -49,25 +49,25 @@ extern "C"{
  */
 
 /**
- * @brief  alert test irq handler
- * @return status code
- *         - 0 success
- *         - 1 run failed
- * @note   none
+ * @brief  告警测试中断处理函数
+ * @return 状态码
+ *         - 0 成功
+ *         - 1 运行失败
+ * @note   无
  */
 uint8_t ina226_alert_test_irq_handler(void);
 
 /**
- * @brief     alert test
- * @param[in] addr_pin iic device address
- * @param[in] r extern resistance
- * @param[in] mask set mask
- * @param[in] threshold set threshold
- * @param[in] timeout_ms timeout in ms
- * @return    status code
- *            - 0 success
- *            - 1 test failed
- * @note      none
+ * @brief     告警测试
+ * @param[in] addr_pin IIC 设备地址
+ * @param[in] r 外部电阻
+ * @param[in] mask 设置掩码
+ * @param[in] threshold 设置阈值
+ * @param[in] timeout_ms 超时时间（毫秒）
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 测试失败
+ * @note      无
  */
 uint8_t ina226_alert_test(ina226_address_t addr_pin, double r, ina226_mask_t mask, float threshold, uint32_t timeout_ms);
 
