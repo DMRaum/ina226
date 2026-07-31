@@ -23,31 +23,31 @@
  @licend  The above is the entire license notice for the JavaScript code in this file
 */
 var menudata={children:[
-{text:"Main Page",url:"index.html"},
-{text:"Topics",url:"topics.html"},
-{text:"Data Structures",url:"annotated.html",children:[
-{text:"Data Structures",url:"annotated.html"},
-{text:"Data Structure Index",url:"classes.html"},
-{text:"Data Fields",url:"functions.html",children:[
-{text:"All",url:"functions.html"},
-{text:"Variables",url:"functions_vars.html"}]}]},
-{text:"Files",url:"files.html",children:[
-{text:"File List",url:"files.html"},
-{text:"Globals",url:"globals.html",children:[
-{text:"All",url:"globals.html",children:[
+{text:"主页",url:"index.html"},
+{text:"主题",url:"topics.html"},
+{text:"数据结构",url:"annotated.html",children:[
+{text:"数据结构",url:"annotated.html"},
+{text:"数据结构索引",url:"classes.html"},
+{text:"数据字段",url:"functions.html",children:[
+{text:"全部",url:"functions.html"},
+{text:"变量",url:"functions_vars.html"}]}]},
+{text:"文件",url:"files.html",children:[
+{text:"文件列表",url:"files.html"},
+{text:"全局成员",url:"globals.html",children:[
+{text:"全部",url:"globals.html",children:[
 {text:"c",url:"globals.html#index_c"},
 {text:"d",url:"globals_d.html#index_d"},
 {text:"i",url:"globals_i.html#index_i"},
 {text:"m",url:"globals_m.html#index_m"},
 {text:"s",url:"globals_s.html#index_s"},
 {text:"t",url:"globals_t.html#index_t"}]},
-{text:"Functions",url:"globals_func.html",children:[
+{text:"函数",url:"globals_func.html",children:[
 {text:"i",url:"globals_func.html#index_i"}]},
-{text:"Typedefs",url:"globals_type.html"},
-{text:"Enumerations",url:"globals_enum.html"},
-{text:"Enumerator",url:"globals_eval.html",children:[
+{text:"类型定义",url:"globals_type.html"},
+{text:"枚举",url:"globals_enum.html"},
+{text:"枚举值",url:"globals_eval.html",children:[
 {text:"i",url:"globals_eval.html#index_i"}]},
-{text:"Macros",url:"globals_defs.html",children:[
+{text:"宏",url:"globals_defs.html",children:[
 {text:"c",url:"globals_defs.html#index_c"},
 {text:"d",url:"globals_defs.html#index_d"},
 {text:"i",url:"globals_defs.html#index_i"},

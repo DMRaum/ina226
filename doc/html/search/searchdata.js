@@ -30,16 +30,16 @@ var indexSectionNames =
 
 var indexSectionLabels =
 {
-  0: "All",
-  1: "Data Structures",
-  2: "Files",
-  3: "Functions",
-  4: "Variables",
-  5: "Typedefs",
-  6: "Enumerations",
-  7: "Enumerator",
-  8: "Macros",
-  9: "Modules",
-  10: "Pages"
+  0: "全部",
+  1: "数据结构",
+  2: "文件",
+  3: "函数",
+  4: "变量",
+  5: "类型定义",
+  6: "枚举",
+  7: "枚举值",
+  8: "宏",
+  9: "模块",
+  10: "页面"
 };
 

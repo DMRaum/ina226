@@ -6,13 +6,13 @@ var searchData=
   ['iic_5fread_3',['iic_read',['../structina226__handle__s.html#af4ef726288b88f51a846483803a1249b',1,'ina226_handle_s']]],
   ['iic_5fwrite_4',['iic_write',['../structina226__handle__s.html#adca3ee7a793bbf510d5267daf0fcf1c5',1,'ina226_handle_s']]],
   ['ina226_5',['LibDriver INA226',['../index.html',1,'']]],
-  ['ina226_20basic_20driver_20function_6',['ina226 basic driver function',['../group__ina226__basic__driver.html',1,'']]],
-  ['ina226_20driver_20function_7',['ina226 driver function',['../group__ina226__driver.html',1,'']]],
-  ['ina226_20example_20driver_20function_8',['ina226 example driver function',['../group__ina226__example__driver.html',1,'']]],
-  ['ina226_20extern_20driver_20function_9',['ina226 extern driver function',['../group__ina226__extern__driver.html',1,'']]],
-  ['ina226_20interface_20driver_20function_10',['ina226 interface driver function',['../group__ina226__interface__driver.html',1,'']]],
-  ['ina226_20link_20driver_20function_11',['ina226 link driver function',['../group__ina226__link__driver.html',1,'']]],
-  ['ina226_20test_20driver_20function_12',['ina226 test driver function',['../group__ina226__test__driver.html',1,'']]],
+  ['ina226_20basic_20driver_20function_6',['ina226 基本驱动函数',['../group__ina226__basic__driver.html',1,'']]],
+  ['ina226_20driver_20function_7',['ina226 驱动函数',['../group__ina226__driver.html',1,'']]],
+  ['ina226_20example_20driver_20function_8',['ina226 示例驱动函数',['../group__ina226__example__driver.html',1,'']]],
+  ['ina226_20extern_20driver_20function_9',['ina226 外部驱动函数',['../group__ina226__extern__driver.html',1,'']]],
+  ['ina226_20interface_20driver_20function_10',['ina226 接口驱动函数',['../group__ina226__interface__driver.html',1,'']]],
+  ['ina226_20link_20driver_20function_11',['ina226 链接驱动函数',['../group__ina226__link__driver.html',1,'']]],
+  ['ina226_20test_20driver_20function_12',['ina226 测试驱动函数',['../group__ina226__test__driver.html',1,'']]],
   ['ina226_5faddress_5f0_13',['INA226_ADDRESS_0',['../group__ina226__basic__driver.html#gga9bd99fe9a446bd5e2c42f78909444869a218698a5fa4f57d1c50c391b0a19c6e2',1,'driver_ina226.h']]],
   ['ina226_5faddress_5f1_14',['INA226_ADDRESS_1',['../group__ina226__basic__driver.html#gga9bd99fe9a446bd5e2c42f78909444869a591142edf456cad71b2f53283273b266',1,'driver_ina226.h']]],
   ['ina226_5faddress_5f2_15',['INA226_ADDRESS_2',['../group__ina226__basic__driver.html#gga9bd99fe9a446bd5e2c42f78909444869abf0f9c696f5d3c97a77d084f52b1d90b',1,'driver_ina226.h']]],
@@ -168,5 +168,5 @@ var searchData=
   ['ina226_5fstatus_5ft_165',['ina226_status_t',['../group__ina226__basic__driver.html#gaa3681680c3b8d9aecfbe8ce857a7c0a1',1,'driver_ina226.h']]],
   ['inited_166',['inited',['../structina226__handle__s.html#a19bedf28d2b9748f6a62d9ae93f4e68f',1,'ina226_handle_s']]],
   ['interface_167',['interface',['../structina226__info__s.html#aebaa6c28dd4f2c3dc27566fcb910fd28',1,'ina226_info_s']]],
-  ['interface_20driver_20function_168',['ina226 interface driver function',['../group__ina226__interface__driver.html',1,'']]]
+  ['interface_20driver_20function_168',['ina226 接口驱动函数',['../group__ina226__interface__driver.html',1,'']]]
 ];

@@ -25,24 +25,24 @@
 var NAVTREE =
 [
   [ "LibDriver INA226", "index.html", [
-    [ "Topics", "topics.html", "topics" ],
-    [ "Data Structures", "annotated.html", [
-      [ "Data Structures", "annotated.html", "annotated_dup" ],
-      [ "Data Structure Index", "classes.html", null ],
-      [ "Data Fields", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+    [ "主题", "topics.html", "topics" ],
+    [ "数据结构", "annotated.html", [
+      [ "数据结构", "annotated.html", "annotated_dup" ],
+      [ "数据结构索引", "classes.html", null ],
+      [ "数据字段", "functions.html", [
+        [ "全部", "functions.html", null ],
+        [ "变量", "functions_vars.html", null ]
       ] ]
     ] ],
-    [ "Files", "files.html", [
-      [ "File List", "files.html", "files_dup" ],
-      [ "Globals", "globals.html", [
-        [ "All", "globals.html", "globals_dup" ],
-        [ "Functions", "globals_func.html", null ],
-        [ "Typedefs", "globals_type.html", null ],
-        [ "Enumerations", "globals_enum.html", null ],
-        [ "Enumerator", "globals_eval.html", null ],
-        [ "Macros", "globals_defs.html", null ]
+    [ "文件", "files.html", [
+      [ "文件列表", "files.html", "files_dup" ],
+      [ "全局成员", "globals.html", [
+        [ "全部", "globals.html", "globals_dup" ],
+        [ "函数", "globals_func.html", null ],
+        [ "类型定义", "globals_type.html", null ],
+        [ "枚举", "globals_enum.html", null ],
+        [ "枚举值", "globals_eval.html", null ],
+        [ "宏", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]
@@ -54,6 +54,6 @@ var NAVTREEINDEX =
 "structina226__info__s.html#a8f9dbe66ac0b66ebae0a36fcb4ba368e"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronization';
-var SYNCOFFMSG = 'click to enable panel synchronization';
-var LISTOFALLMEMBERS = 'List of all members';
+var SYNCONMSG = '点击禁用面板同步';
+var SYNCOFFMSG = '点击启用面板同步';
+var LISTOFALLMEMBERS = '所有成员列表';
