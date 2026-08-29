@@ -22,15 +22,15 @@
  * SOFTWARE. 
  *
  * @file      raspberrypi4b_driver_ina226_interface.c
- * @brief     raspberrypi4b driver ina226 interface source file
+ * @brief     树莓派4B INA226驱动接口源文件
  * @version   1.0.0
  * @author    Shifeng Li
  * @date      2025-01-29
  *
- * <h3>history</h3>
+ * <h3>历史</h3>
  * <table>
- * <tr><th>Date        <th>Version  <th>Author      <th>Description
- * <tr><td>2025/01/29  <td>1.0      <td>Shifeng Li  <td>first upload
+ * <tr><th>日期        <th>版本    <th>作者        <th>描述
+ * <tr><td>2025/01/29  <td>1.0     <td>Shifeng Li  <td>首次上传
  * </table>
  */
 
@@ -39,21 +39,21 @@
 #include <stdarg.h>
 
 /**
- * @brief iic device name definition
+ * @brief IIC设备名称定义
  */
-#define IIC_DEVICE_NAME "/dev/i2c-1"        /**< iic device name */
+#define IIC_DEVICE_NAME "/dev/i2c-1"        /**< IIC设备名称 */
 
 /**
- * @brief iic device handle definition
+ * @brief IIC设备句柄定义
  */
-static int gs_fd;                           /**< iic handle */
+static int gs_fd;                           /**< IIC句柄 */
 
 /**
- * @brief  interface iic bus init
- * @return status code
- *         - 0 success
- *         - 1 iic init failed
- * @note   none
+ * @brief  接口IIC总线初始化
+ * @return 状态码
+ *         - 0 成功
+ *         - 1 IIC初始化失败
+ * @note   无
  */
 uint8_t ina226_interface_iic_init(void)
 {
@@ -61,11 +61,11 @@ uint8_t ina226_interface_iic_init(void)
 }
 
 /**
- * @brief  interface iic bus deinit
- * @return status code
- *         - 0 success
- *         - 1 iic deinit failed
- * @note   none
+ * @brief  接口IIC总线反初始化
+ * @return 状态码
+ *         - 0 成功
+ *         - 1 IIC反初始化失败
+ * @note   无
  */
 uint8_t ina226_interface_iic_deinit(void)
 {
@@ -73,15 +73,15 @@ uint8_t ina226_interface_iic_deinit(void)
 }
 
 /**
- * @brief      interface iic bus read
- * @param[in]  addr iic device write address
- * @param[in]  reg iic register address
- * @param[out] *buf pointer to a data buffer
- * @param[in]  len length of the data buffer
- * @return     status code
- *             - 0 success
- *             - 1 read failed
- * @note       none
+ * @brief      接口IIC总线读取
+ * @param[in]  addr IIC设备写地址
+ * @param[in]  reg IIC寄存器地址
+ * @param[out] *buf 指向数据缓冲区的指针
+ * @param[in]  len 数据缓冲区长度
+ * @return     状态码
+ *             - 0 成功
+ *             - 1 读取失败
+ * @note       无
  */
 uint8_t ina226_interface_iic_read(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len)
 {
@@ -89,15 +89,15 @@ uint8_t ina226_interface_iic_read(uint8_t addr, uint8_t reg, uint8_t *buf, uint1
 }
 
 /**
- * @brief     interface iic bus write
- * @param[in] addr iic device write address
- * @param[in] reg iic register address
- * @param[in] *buf pointer to a data buffer
- * @param[in] len length of the data buffer
- * @return    status code
- *            - 0 success
- *            - 1 write failed
- * @note      none
+ * @brief     接口IIC总线写入
+ * @param[in] addr IIC设备写地址
+ * @param[in] reg IIC寄存器地址
+ * @param[in] *buf 指向数据缓冲区的指针
+ * @param[in] len 数据缓冲区长度
+ * @return    状态码
+ *            - 0 成功
+ *            - 1 写入失败
+ * @note      无
  */
 uint8_t ina226_interface_iic_write(uint8_t addr, uint8_t reg, uint8_t *buf, uint16_t len)
 {
@@ -105,9 +105,9 @@ uint8_t ina226_interface_iic_write(uint8_t addr, uint8_t reg, uint8_t *buf, uint
 }
 
 /**
- * @brief     interface delay ms
- * @param[in] ms time
- * @note      none
+ * @brief     接口毫秒级延时
+ * @param[in] ms 时间
+ * @note      无
  */
 void ina226_interface_delay_ms(uint32_t ms)
 {
@@ -115,9 +115,9 @@ void ina226_interface_delay_ms(uint32_t ms)
 }
 
 /**
- * @brief     interface print format data
- * @param[in] fmt format data
- * @note      none
+ * @brief     接口打印格式化数据
+ * @param[in] fmt 格式化数据
+ * @note      无
  */
 void ina226_interface_debug_print(const char *const fmt, ...)
 {
@@ -133,9 +133,9 @@ void ina226_interface_debug_print(const char *const fmt, ...)
 }
 
 /**
- * @brief     interface receive callback
- * @param[in] type irq type
- * @note      none
+ * @brief     接口接收回调函数
+ * @param[in] type 中断类型
+ * @note      无
  */
 void ina226_interface_receive_callback(uint8_t type)
 {
@@ -143,37 +143,37 @@ void ina226_interface_receive_callback(uint8_t type)
     {
         case INA226_STATUS_SHUNT_VOLTAGE_OVER_VOLTAGE :
         {
-            ina226_interface_debug_print("ina226: irq shunt voltage over voltage.\n");
+            ina226_interface_debug_print("ina226: 中断-并联电压过压。\n");
             
             break;
         }
         case INA226_STATUS_SHUNT_VOLTAGE_UNDER_VOLTAGE :
         {
-            ina226_interface_debug_print("ina226: irq shunt voltage under voltage.\n");
+            ina226_interface_debug_print("ina226: 中断-并联电压欠压。\n");
             
             break;
         }
         case INA226_STATUS_BUS_VOLTAGE_OVER_VOLTAGE :
         {
-            ina226_interface_debug_print("ina226: irq bus voltage over voltage.\n");
+            ina226_interface_debug_print("ina226: 中断-总线电压过压。\n");
             
             break;
         }
         case INA226_STATUS_BUS_VOLTAGE_UNDER_VOLTAGE :
         {
-            ina226_interface_debug_print("ina226: irq bus voltage under voltage.\n");
+            ina226_interface_debug_print("ina226: 中断-总线电压欠压。\n");
             
             break;
         }
         case INA226_STATUS_POWER_OVER_LIMIT :
         {
-            ina226_interface_debug_print("ina226: irq power over limit.\n");
+            ina226_interface_debug_print("ina226: 中断-功率超限。\n");
             
             break;
         }
         default :
         {
-            ina226_interface_debug_print("ina226: unknown code.\n");
+            ina226_interface_debug_print("ina226: 未知代码。\n");
             
             break;
         }
